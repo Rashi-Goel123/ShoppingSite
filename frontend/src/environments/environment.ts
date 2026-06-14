@@ -1,7 +1,7 @@
 export const environment = {
-  production: false,
+  production: true,
   useMockData: false,
-  apiUrl: 'http://localhost:5229/api',
-  hubUrl: 'http://localhost:5229/hubs',
+  apiUrl: 'https://ecommerce-api-ugym.onrender.com/api',
+  hubUrl: 'https://ecommerce-api-ugym.onrender.com/hubs',
   razorpayKeyId: 'rzp_test_T1CauBeDLYuxCr'
 };
