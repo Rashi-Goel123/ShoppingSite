@@ -26,11 +26,11 @@ services:
   # ----------------------------------------
   # 2. Frontend Static Site (Angular)
   # ----------------------------------------
-  - type: web
+  - type: static
     name: ecommerce-ui
-    env: static
+    rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: frontend/dist/frontend/browser
+    staticPublishPath: dist/frontend/browser
     envVars:
       - key: NODE_VERSION
         value: 20
