@@ -63,7 +63,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins(
                 "http://localhost:4200",
                 "http://localhost:4300",
-                "https://shoppingsite.weeb.onrender.com"
+                "https://shoppingsite-weeb.onrender.com"
               )
               .AllowAnyHeader()
               .AllowAnyMethod()
