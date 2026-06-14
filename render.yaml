@@ -29,7 +29,6 @@ services:
   - type: web
     name: ecommerce-ui
     env: static
-    region: ohio
     buildCommand: npm install && npm run build
     staticPublishPath: frontend/dist/frontend/browser
     envVars:
