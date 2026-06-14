@@ -60,7 +60,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://localhost:4300")
+        policy.WithOrigins(
+                "http://localhost:4200",
+                "http://localhost:4300",
+                "https://shoppingsite.weeb.onrender.com"
+              )
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
