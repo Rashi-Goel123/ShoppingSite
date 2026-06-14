@@ -1,0 +1,2 @@
+.login-page { display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 160px); padding: 20px; }
+    .login-card { width: 100%; max-width: 420px; padding: 40px 32px; }

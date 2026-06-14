@@ -1,0 +1,77 @@
+
+    @if (loading()) {
+      <div class="loading-spinner"><div class="spinner-border"></div></div>
+    } @else if (order()) {
+      <div class="page-container">
+        <a routerLink="/orders" style="color:var(--text-muted);font-size:0.85rem">← Back to Orders</a>
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mt-3 mb-4">
+          <div>
+            <h2 style="font-size:1.5rem;margin-bottom:4px">{{ order()!.orderNumber }}</h2>
+            <span style="color:var(--text-muted);font-size:0.85rem">Placed on {{ order()!.createdAt | date:'dd MMM yyyy, hh:mm a' }}</span>
+          </div>
+          <span class="status-badge" [class]="order()!.status" style="font-size:0.9rem;padding:8px 18px">{{ order()!.status.replace('_', ' ') }}</span>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="card-dark p-4 mb-4">
+              <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:20px">📍 Order Tracking</h5>
+              <div class="tracking-timeline">
+                @for (event of order()!.tracking; track event.timestamp; let i = $index; let last = $last) {
+                  <div class="tracking-step" [class.completed]="!last" [class.current]="last">
+                    <div class="step-status">{{ event.status.replace('_', ' ') }}</div>
+                    <div class="step-desc">{{ event.description }}</div>
+                    @if (event.location) { <div class="step-desc">📍 {{ event.location }}</div> }
+                    <div class="step-time">{{ event.timestamp | date:'dd MMM, hh:mm a' }}</div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="card-dark p-4">
+              <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">📦 Items</h5>
+              @for (item of order()!.items; track item.id) {
+                <div class="d-flex gap-3 mb-3 pb-3" style="border-bottom:1px solid var(--border-color)">
+                  <img [src]="item.image" style="width:70px;height:85px;object-fit:cover;border-radius:8px">
+                  <div class="flex-grow-1">
+                    <h6 style="color:var(--text-primary);font-size:0.9rem;margin-bottom:4px;font-family:var(--font-body)">{{ item.title }}</h6>
+                    <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:4px">{{ item.color }} · {{ item.size }} · Qty: {{ item.quantity }}</p>
+                    <span style="font-weight:600;color:var(--text-primary)">₹{{ item.priceAtPurchase * item.quantity }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="card-dark p-4 mb-4">
+              <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">Payment Summary</h5>
+              <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem"><span style="color:var(--text-secondary)">Subtotal</span><span>₹{{ order()!.subtotal }}</span></div>
+              @if (order()!.discount > 0) {
+                <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem"><span style="color:var(--success)">Discount</span><span style="color:var(--success)">-₹{{ order()!.discount }}</span></div>
+              }
+              <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem"><span style="color:var(--text-secondary)">Delivery</span><span>{{ order()!.deliveryCharge === 0 ? 'FREE' : '₹' + order()!.deliveryCharge }}</span></div>
+              <hr style="border-color:var(--border-color)">
+              <div class="d-flex justify-content-between" style="font-size:1.1rem;font-weight:700"><span>Total</span><span>₹{{ order()!.totalAmount }}</span></div>
+              <div class="mt-3">
+                <span class="status-badge" [class]="order()!.paymentStatus">{{ order()!.paymentStatus }}</span>
+                <span style="color:var(--text-muted);font-size:0.8rem;margin-left:8px;text-transform:capitalize">{{ order()!.paymentMethod }}</span>
+              </div>
+            </div>
+
+            <div class="card-dark p-4 mb-4">
+              <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:8px">🏠 Delivery Address</h5>
+              <p style="color:var(--text-secondary);font-size:0.88rem;margin:0">
+                {{ order()!.shippingAddress.street }}<br>
+                {{ order()!.shippingAddress.city }}, {{ order()!.shippingAddress.state }} - {{ order()!.shippingAddress.pincode }}
+              </p>
+            </div>
+
+            @if (order()!.status !== 'delivered' && order()!.status !== 'cancelled') {
+              <button class="btn btn-outline-glow w-100" style="border-color:var(--danger);color:var(--danger)" (click)="cancelOrder()">Cancel Order</button>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  

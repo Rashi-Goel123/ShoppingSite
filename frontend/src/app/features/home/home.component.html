@@ -1,0 +1,163 @@
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center min-vh-75">
+      <div class="col-lg-6">
+        <p class="hero-tag">NEW SEASON COLLECTION 2026</p>
+        <h1 class="hero-title">Redefine Your <span class="gradient-text">Style</span></h1>
+        <p class="hero-desc">Discover curated fashion from premium brands. Trends that set you apart — delivered to your
+          doorstep.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a routerLink="/products" class="btn btn-primary-gradient btn-lg">Shop Now →</a>
+          <a routerLink="/products" [queryParams]="{gender:'women'}" class="btn btn-outline-glow btn-lg">Women's
+            Collection</a>
+        </div>
+        <div class="hero-stats d-flex gap-4 mt-4">
+          <div><span class="stat-num">200+</span><span class="stat-label">Brands</span></div>
+          <div><span class="stat-num">10K+</span><span class="stat-label">Products</span></div>
+          <div><span class="stat-num">50K+</span><span class="stat-label">Happy Customers</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center mt-4 mt-lg-0">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" alt="Fashion"
+            class="hero-image">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="section-header">
+      <h2>Shop by Category</h2>
+      <a routerLink="/products" class="btn btn-sm btn-outline-glow">View All</a>
+    </div>
+    <div class="row g-3">
+      @for (cat of categories(); track cat.id) {
+      <div class="col-6 col-md-4 col-lg-2">
+        <a [routerLink]="['/products']" [queryParams]="{category: cat.slug}" class="category-card text-center d-block">
+          <div class="cat-icon">{{ cat.icon }}</div>
+          <p class="cat-name">{{ cat.name }}</p>
+        </a>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Products</h2>
+      <a routerLink="/products" class="btn btn-sm btn-outline-glow">View All</a>
+    </div>
+    <div class="row g-4">
+      @for (product of featured(); track product.id) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <a [routerLink]="['/products', product.slug]" class="text-decoration-none">
+          <div class="product-card">
+            <div class="product-image">
+              <img [src]="product.firstImage" [alt]="product.title" loading="lazy">
+              @if (product.discountPercent) {
+              <span class="discount-badge">-{{ product.discountPercent }}%</span>
+              }
+              <button class="wishlist-btn" (click)="$event.preventDefault()">♡</button>
+            </div>
+            <div class="product-info">
+              <p class="product-brand">{{ product.brand }}</p>
+              <h6 class="product-title">{{ product.title }}</h6>
+              <div class="product-rating">
+                ⭐ {{ product.ratingAverage.toFixed(1) }}
+                <span class="count">({{ product.ratingCount }})</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹{{ product.discountedPrice || product.basePrice }}</span>
+                @if (product.mrp && product.mrp > (product.discountedPrice || product.basePrice)) {
+                <span class="original">₹{{ product.mrp }}</span>
+                <span class="discount">{{ product.discountPercent }}% OFF</span>
+                }
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="promo-banner p-5 text-center" style="background:var(--accent-gradient);border-radius:var(--radius-lg)">
+      <h2 style="font-size:2.2rem;color:white;margin-bottom:12px">🎉 Flat 30% Off on First Order</h2>
+      <p style="color:rgba(255,255,255,0.85);font-size:1.1rem;margin-bottom:24px">Use code <strong
+          style="font-size:1.3rem;letter-spacing:2px">WELCOME50</strong> at checkout</p>
+      <a routerLink="/products" class="btn btn-lg"
+        style="background:white;color:var(--primary-dark);font-weight:700;border-radius:var(--radius);padding:14px 36px">Shop
+        Now</a>
+    </div>
+  </div>
+</section>
+<section class="py-5">
+  <div class="container">
+    <div class="section-header">
+      <h2>New Arrivals</h2>
+      <a routerLink="/products" class="btn btn-sm btn-outline-glow">View All</a>
+    </div>
+    <div class="row g-4">
+      @for (product of newArrivals(); track product.id) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <a [routerLink]="['/products', product.slug]" class="text-decoration-none">
+          <div class="product-card">
+            <div class="product-image">
+              <img [src]="product.firstImage" [alt]="product.title" loading="lazy">
+            </div>
+            <div class="product-info">
+              <p class="product-brand">{{ product.brand }}</p>
+              <h6 class="product-title">{{ product.title }}</h6>
+              <div class="product-price">
+                <span class="current">₹{{ product.discountedPrice || product.basePrice }}</span>
+                @if (product.mrp) {
+                <span class="original">₹{{ product.mrp }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+<section class="py-5 mb-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-lg-3">
+        <div class="card-glass p-4 text-center h-100">
+          <div style="font-size:2rem;margin-bottom:8px">🚚</div>
+          <h6 style="color:var(--text-primary)">Free Shipping</h6>
+          <p style="color:var(--text-muted);font-size:0.82rem;margin:0">On orders above ₹499</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card-glass p-4 text-center h-100">
+          <div style="font-size:2rem;margin-bottom:8px">↩️</div>
+          <h6 style="color:var(--text-primary)">Easy Returns</h6>
+          <p style="color:var(--text-muted);font-size:0.82rem;margin:0">7-day return policy</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card-glass p-4 text-center h-100">
+          <div style="font-size:2rem;margin-bottom:8px">🔒</div>
+          <h6 style="color:var(--text-primary)">Secure Payment</h6>
+          <p style="color:var(--text-muted);font-size:0.82rem;margin:0">Razorpay secured checkout</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card-glass p-4 text-center h-100">
+          <div style="font-size:2rem;margin-bottom:8px">💬</div>
+          <h6 style="color:var(--text-primary)">AI Chat Support</h6>
+          <p style="color:var(--text-muted);font-size:0.82rem;margin:0">24/7 intelligent assistant</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

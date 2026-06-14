@@ -1,0 +1,7 @@
+
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { color: var(--text-secondary); font-size: 0.88rem; transition: var(--transition); }
+    .footer-links a:hover { color: var(--primary-light); padding-left: 4px; }
+    .social-icon { font-size: 1.3rem; text-decoration: none; transition: var(--transition); }
+    .social-icon:hover { transform: scale(1.2); }
+  

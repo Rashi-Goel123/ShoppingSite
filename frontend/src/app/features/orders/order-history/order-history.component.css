@@ -1,0 +1,4 @@
+
+    .order-card { transition: var(--transition); cursor: pointer; }
+    .order-card:hover { border-color: var(--primary); transform: translateX(4px); }
+  

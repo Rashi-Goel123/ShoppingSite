@@ -1,0 +1,81 @@
+<div class="page-container">
+  <h2 class="mb-4" style="font-size:1.6rem">🛒 Shopping Cart</h2>
+
+  @if (cart.items().length === 0) {
+  <div class="empty-state">
+    <div class="empty-icon">🛒</div>
+    <h3>Your cart is empty</h3>
+    <p>Looks like you haven't added anything yet</p>
+    <a routerLink="/products" class="btn btn-primary-gradient">Start Shopping</a>
+  </div>
+  } @else {
+  <div class="row g-4">
+    <div class="col-lg-8">
+      @for (item of cart.items(); track item.variantId) {
+      <div class="card-dark p-3 mb-3">
+        <div class="d-flex gap-3">
+          <img [src]="item.image" [alt]="item.title"
+            style="width:100px;height:120px;object-fit:cover;border-radius:var(--radius-sm)">
+          <div class="flex-grow-1">
+            <h6 style="color:var(--text-primary);font-size:0.95rem;margin-bottom:4px;font-family:var(--font-body)">{{
+              item.title }}</h6>
+            <p style="color:var(--text-muted);font-size:0.8rem;margin-bottom:8px">
+              {{ item.color }} · {{ item.size }}
+            </p>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span style="font-weight:700;color:var(--text-primary)">₹{{ item.price }}</span>
+              @if (item.mrp > item.price) {
+              <span style="color:var(--text-muted);text-decoration:line-through;font-size:0.85rem">₹{{ item.mrp
+                }}</span>
+              }
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center gap-2">
+                <button class="qty-btn" (click)="updateQty(item.variantId, item.quantity - 1)">−</button>
+                <span style="min-width:32px;text-align:center;font-weight:600">{{ item.quantity }}</span>
+                <button class="qty-btn" (click)="updateQty(item.variantId, item.quantity + 1)"
+                  [disabled]="item.quantity >= item.stock">+</button>
+              </div>
+              <button class="btn btn-sm" style="color:var(--danger);font-size:0.8rem"
+                (click)="removeItem(item.variantId)">✕ Remove</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="col-lg-4">
+      <div class="card-dark p-4 sticky-top" style="top:80px">
+        <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">Order Summary</h5>
+        <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem">
+          <span style="color:var(--text-secondary)">Subtotal ({{ cart.itemCount() }} items)</span>
+          <span style="color:var(--text-primary)">₹{{ cart.subtotal() }}</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem">
+          <span style="color:var(--text-secondary)">Total MRP</span>
+          <span style="color:var(--text-muted);text-decoration:line-through">₹{{ cart.totalMrp() }}</span>
+        </div>
+        @if (cart.savings() > 0) {
+        <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem">
+          <span style="color:var(--success)">You Save</span>
+          <span style="color:var(--success);font-weight:600">-₹{{ cart.savings() }}</span>
+        </div>
+        }
+        <div class="d-flex justify-content-between mb-2" style="font-size:0.9rem">
+          <span style="color:var(--text-secondary)">Delivery</span>
+          <span [style.color]="cart.subtotal() >= 499 ? 'var(--success)' : 'var(--text-primary)'"
+            style="font-weight:500">
+            {{ cart.subtotal() >= 499 ? 'FREE' : '₹49' }}
+          </span>
+        </div>
+        <hr style="border-color:var(--border-color)">
+        <div class="d-flex justify-content-between mb-3" style="font-size:1.1rem;font-weight:700">
+          <span style="color:var(--text-primary)">Total</span>
+          <span style="color:var(--text-primary)">₹{{ cart.subtotal() + (cart.subtotal() >= 499 ? 0 : 49) }}</span>
+        </div>
+        <a routerLink="/checkout" class="btn btn-primary-gradient w-100 py-3">Proceed to Checkout →</a>
+      </div>
+    </div>
+  </div>
+  }
+</div>

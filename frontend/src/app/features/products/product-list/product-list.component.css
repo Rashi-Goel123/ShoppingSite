@@ -1,0 +1,4 @@
+
+    .filter-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
+    .form-control-sm, .form-select-sm { font-size: 0.85rem; padding: 8px 12px; }
+  

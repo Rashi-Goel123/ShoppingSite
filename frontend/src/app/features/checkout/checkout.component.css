@@ -1,0 +1,45 @@
+.address-option {
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    border-color: var(--primary);
+  }
+
+  &.selected {
+    border-color: var(--primary);
+    background: rgba(108, 92, 231, 0.08);
+  }
+}
+
+.radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  flex-shrink: 0;
+  transition: var(--transition);
+  position: relative;
+
+  &.active {
+    border-color: var(--primary);
+  }
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}

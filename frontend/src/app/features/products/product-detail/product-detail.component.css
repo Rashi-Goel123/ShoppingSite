@@ -1,0 +1,5 @@
+
+    .thumb { cursor: pointer; border: 2px solid transparent; border-radius: var(--radius-sm); overflow: hidden; transition: var(--transition); }
+    .thumb.active, .thumb:hover { border-color: var(--primary); }
+    .filter-label { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  

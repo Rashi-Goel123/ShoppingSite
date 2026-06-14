@@ -1,0 +1,229 @@
+@if (cart.isDrawerOpen()) {
+<div class="drawer-backdrop" (click)="cart.closeDrawer()"></div>
+}
+<div class="cart-drawer" [class.open]="cart.isDrawerOpen()">
+  <div class="drawer-header">
+    <div class="header-title">
+      <div class="header-icon">
+        <i class="bi bi-bag-heart-fill"></i>
+      </div>
+      <span class="header-text">Your Cart</span>
+      <span class="header-count">{{ cart.itemCount() }}</span>
+    </div>
+    <button class="close-btn" (click)="cart.closeDrawer()" aria-label="Close cart">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="drawer-body">
+    @if (cart.items().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon-wrap">
+        <i class="bi bi-cart-x"></i>
+      </div>
+      <h5 style="color:#f1f0ff; font-weight:700; margin-bottom:10px;">Your cart is empty</h5>
+      <p style="color:#6b7280; font-size:0.88rem; max-width:260px; margin:0 auto 24px; line-height:1.6;">
+        Explore our premium collections and find something you'll love.
+      </p>
+      <button class="btn btn-primary-gradient" (click)="cart.closeDrawer(); navigate('/products')">
+        <i class="bi bi-shop me-2"></i>Continue Shopping
+      </button>
+    </div>
+
+    } @else {
+    <div class="shipping-progress-card">
+      @if (getDeliveryCharge() === 0) {
+      <div class="shipping-unlocked">
+        <i class="bi bi-truck-front-fill"></i>
+        You've unlocked FREE Shipping! 🎉
+      </div>
+      } @else {
+      <div class="shipping-text">
+        <span>Add <strong>₹{{ getShippingShortage() }}</strong> more for free delivery</span>
+        <span class="amount-label">₹{{ cart.subtotal() }} / ₹499</span>
+      </div>
+      }
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" [style.width.%]="getShippingProgress()"></div>
+      </div>
+    </div>
+
+    <div class="cart-items-list">
+      @for (item of cart.items(); track item.variantId) {
+
+      <div class="cart-item">
+        <div class="item-img-container">
+
+          @if (getDiscountPct(item.price, item.mrp) > 0) {
+          <span class="item-discount-badge">
+            {{ getDiscountPct(item.price, item.mrp) }}% OFF
+          </span>
+          }
+
+          <img [src]="item.image" [alt]="item.title" class="item-img">
+
+        </div>
+        <div class="item-details">
+
+          <div>
+            <h6 class="item-title">{{ item.title }}</h6>
+
+            <div class="variant-tags">
+              @if (item.color) {
+              <span class="variant-tag">{{ item.color }}</span>
+              }
+
+              @if (item.size) {
+              <span class="variant-tag">{{ item.size }}</span>
+              }
+            </div>
+
+            <div class="item-rating">
+              @for (star of getStars(getRating(item.productId)); track $index) {
+
+              @if (star === 1) {
+              <i class="bi bi-star-fill"></i>
+              } @else if (star === 0.5) {
+              <i class="bi bi-star-half"></i>
+              } @else {
+              <i class="bi bi-star" style="opacity:.3"></i>
+              }
+
+              }
+
+              <span class="rating-val">
+                {{ getRating(item.productId) | number:'1.1-1' }}
+              </span>
+            </div>
+
+            <div class="item-price">
+              <span class="current">₹{{ item.price }}</span>
+
+              @if (item.mrp > item.price) {
+              <span class="mrp">₹{{ item.mrp }}</span>
+              }
+            </div>
+          </div>
+          <div class="item-actions">
+
+            <div class="qty-control">
+
+              <button class="qty-btn" (click)="updateQty(item.variantId, item.quantity - 1)"
+                [disabled]="item.quantity <= 1">
+
+                <i class="bi bi-dash"></i>
+              </button>
+
+              <span class="qty-num">
+                {{ item.quantity }}
+              </span>
+
+              <button class="qty-btn" (click)="updateQty(item.variantId, item.quantity + 1)"
+                [disabled]="item.quantity >= item.stock">
+
+                <i class="bi bi-plus"></i>
+              </button>
+
+            </div>
+
+            <button class="remove-btn" (click)="removeItem(item.variantId)">
+
+              <i class="bi bi-trash3"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      }
+    </div>
+    @if (recommendations().length > 0) {
+    <div class="recommendations-section">
+      <div class="section-label">
+        Recommended For You
+      </div>
+      <div class="rec-scroll">
+        @for (rec of recommendations(); track rec.id) {
+        <div class="rec-card" (click)="navigateToProduct(rec.slug)">
+          <div class="rec-img-container">
+            <img [src]="rec.firstImage" [alt]="rec.title" class="rec-img">
+          </div>
+          <div class="rec-details">
+            <span class="rec-brand">{{ rec.brand }}</span>
+            <span class="rec-title">{{ rec.title }}</span>
+            <div class="rec-price-row">
+              <span class="current">₹{{ rec.discountedPrice || rec.basePrice }}</span>
+              @if (rec.mrp && rec.mrp > (rec.discountedPrice || rec.basePrice)) {
+              <span class="mrp">₹{{ rec.mrp }}</span>
+              }
+            </div>
+          </div>
+          <i class="bi bi-chevron-right rec-arrow"></i>
+        </div>
+        }
+      </div>
+    </div>
+    }
+    <div class="trust-strip">
+      <div class="trust-item">
+        <i class="bi bi-shield-check"></i>
+        <span>Secure<br>Checkout</span>
+      </div>
+      <div class="trust-item">
+        <i class="bi bi-arrow-counterclockwise"></i>
+        <span>Easy<br>Returns</span>
+      </div>
+      <div class="trust-item">
+        <i class="bi bi-lightning-charge-fill"></i>
+        <span>Fast<br>Delivery</span>
+      </div>
+    </div>
+
+    }
+  </div>
+  @if (cart.items().length > 0) {
+  <div class="drawer-footer">
+    <div class="summary-rows">
+
+      <div class="price-row">
+        <span>Subtotal</span>
+        <span class="val">₹{{ cart.subtotal() }}</span>
+      </div>
+
+      @if (cart.savings() > 0) {
+      <div class="price-row savings">
+        <span>You Save</span>
+        <span class="val">−₹{{ cart.savings() }}</span>
+      </div>
+      }
+
+      <div class="price-row" [class.free-ship]="getDeliveryCharge() === 0">
+        <span>Delivery</span>
+        @if (getDeliveryCharge() === 0) {
+        <span class="val">FREE</span>
+        } @else {
+        <span class="val">₹{{ getDeliveryCharge() }}</span>
+        }
+      </div>
+
+      <div class="price-row total-row">
+        <span>Total</span>
+        <span class="total-val">₹{{ getFinalTotal() }}</span>
+      </div>
+
+    </div>
+    <button class="checkout-btn" (click)="cart.closeDrawer(); navigate('/checkout')">
+      <i class="bi bi-lock-fill" style="font-size:0.85rem; opacity:0.85;"></i>
+      Proceed to Checkout
+      <i class="bi bi-arrow-right" style="font-size:0.9rem;"></i>
+    </button>
+
+    <div class="checkout-meta">
+      <i class="bi bi-shield-lock-fill"></i>
+      SSL encrypted &amp; safe checkout
+    </div>
+  </div>
+  }
+
+</div>

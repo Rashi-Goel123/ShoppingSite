@@ -1,0 +1,47 @@
+
+    <div class="login-page">
+      <div class="login-card card-glass">
+        <div class="text-center mb-4">
+          <span style="font-size:3rem">👗</span>
+          <h2 class="mt-2 gradient-text" style="font-family:var(--font-heading);font-size:1.8rem">Welcome Back</h2>
+          <p style="color:var(--text-secondary);font-size:0.9rem">Login with your mobile number</p>
+        </div>
+
+        @if (!otpSent()) {
+          <div class="mb-3">
+            <label class="form-label" style="color:var(--text-secondary);font-size:0.85rem">Mobile Number</label>
+            <div class="input-group">
+              <span class="input-group-text" style="background:var(--dark-secondary);border-color:var(--border-color);color:var(--text-muted)">+91</span>
+              <input type="tel" class="form-control" placeholder="Enter 10-digit number" [(ngModel)]="phone" maxlength="10" (keyup.enter)="sendOtp()">
+            </div>
+          </div>
+          <button class="btn btn-primary-gradient w-100 py-3" (click)="sendOtp()" [disabled]="loading() || phone.length < 10">
+            {{ loading() ? 'Sending...' : 'Send OTP' }}
+          </button>
+        } @else {
+          <div class="mb-3">
+            <label class="form-label" style="color:var(--text-secondary);font-size:0.85rem">Enter OTP sent to +91 {{ phone }}</label>
+            <input type="text" class="form-control text-center" placeholder="● ● ● ● ● ●" [(ngModel)]="otp" maxlength="6"
+                   style="font-size:1.5rem;letter-spacing:12px;font-weight:700" (keyup.enter)="verifyOtp()">
+            <small style="color:var(--text-muted)">Dev mode: Use <strong style="color:var(--success)">123456</strong></small>
+          </div>
+          <button class="btn btn-primary-gradient w-100 py-3" (click)="verifyOtp()" [disabled]="loading() || otp.length < 6">
+            {{ loading() ? 'Verifying...' : 'Verify & Login' }}
+          </button>
+          <button class="btn btn-link w-100 mt-2" style="color:var(--text-muted);font-size:0.85rem" (click)="otpSent.set(false)">← Change Number</button>
+        }
+
+        @if (error()) {
+          <div class="alert mt-3 py-2 text-center" style="background:rgba(248,81,73,0.1);border-color:var(--danger);color:var(--danger);border-radius:var(--radius-sm);font-size:0.85rem">
+            {{ error() }}
+          </div>
+        }
+
+        <hr style="border-color:var(--border-color);margin:24px 0">
+        <div class="text-center">
+          <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px">Admin?</p>
+          <a routerLink="/admin/login" style="color:var(--primary-light);font-size:0.85rem">Login as Admin →</a>
+        </div>
+      </div>
+    </div>
+  

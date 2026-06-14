@@ -1,0 +1,98 @@
+
+    <div class="page-container">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 style="font-size:1.6rem">🔧 Admin Dashboard</h2>
+        <a routerLink="/" class="btn btn-sm btn-outline-glow">← Back to Store</a>
+      </div>
+
+      @if (stats()) {
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-lg-3">
+            <div class="card-glass p-4">
+              <div style="font-size:1.5rem;margin-bottom:4px">💰</div>
+              <p style="color:var(--text-muted);font-size:0.78rem;margin-bottom:4px">Total Revenue</p>
+              <h4 style="color:var(--success);font-family:var(--font-body);font-size:1.4rem;margin:0">₹{{ stats()!.totalRevenue | number }}</h4>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="card-glass p-4">
+              <div style="font-size:1.5rem;margin-bottom:4px">📦</div>
+              <p style="color:var(--text-muted);font-size:0.78rem;margin-bottom:4px">Total Orders</p>
+              <h4 style="color:var(--primary-light);font-family:var(--font-body);font-size:1.4rem;margin:0">{{ stats()!.totalOrders }}</h4>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="card-glass p-4">
+              <div style="font-size:1.5rem;margin-bottom:4px">👥</div>
+              <p style="color:var(--text-muted);font-size:0.78rem;margin-bottom:4px">Total Users</p>
+              <h4 style="color:var(--secondary);font-family:var(--font-body);font-size:1.4rem;margin:0">{{ stats()!.totalUsers }}</h4>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="card-glass p-4">
+              <div style="font-size:1.5rem;margin-bottom:4px">👗</div>
+              <p style="color:var(--text-muted);font-size:0.78rem;margin-bottom:4px">Products</p>
+              <h4 style="color:var(--accent);font-family:var(--font-body);font-size:1.4rem;margin:0">{{ stats()!.totalProducts }}</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="card-dark p-4">
+              <div style="font-size:1rem;margin-bottom:4px">⏳ Pending Orders</div>
+              <h3 style="color:var(--warning);font-family:var(--font-body)">{{ stats()!.pendingOrders }}</h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-dark p-4">
+              <div style="font-size:1rem;margin-bottom:4px">✅ Delivered</div>
+              <h3 style="color:var(--success);font-family:var(--font-body)">{{ stats()!.deliveredOrders }}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-dark p-4 mb-4">
+          <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">📋 Recent Orders</h5>
+          <div class="table-responsive">
+            <table class="table" style="color:var(--text-secondary)">
+              <thead>
+                <tr style="border-color:var(--border-color);font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">
+                  <th>Order</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (order of stats()!.recentOrders; track order.id) {
+                  <tr style="border-color:var(--border-color)">
+                    <td style="font-weight:600;color:var(--text-primary)">{{ order.orderNumber }}</td>
+                    <td>{{ order.userName }}</td>
+                    <td style="font-weight:600;color:var(--text-primary)">₹{{ order.totalAmount }}</td>
+                    <td><span class="status-badge" [class]="order.status">{{ order.status }}</span></td>
+                    <td style="font-size:0.82rem">{{ order.createdAt | date:'dd MMM' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-dark p-4">
+          <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">🏆 Top Selling Products</h5>
+          @for (product of stats()!.topProducts; track product.productId) {
+            <div class="d-flex align-items-center gap-3 mb-3 pb-3" style="border-bottom:1px solid var(--border-color)">
+              @if (product.image) {
+                <img [src]="product.image" style="width:50px;height:50px;object-fit:cover;border-radius:8px">
+              }
+              <div class="flex-grow-1">
+                <p style="color:var(--text-primary);font-size:0.88rem;margin:0;font-weight:500">{{ product.title }}</p>
+                <span style="color:var(--text-muted);font-size:0.78rem">{{ product.totalSold }} sold</span>
+              </div>
+              <span style="color:var(--success);font-weight:700">₹{{ product.totalRevenue | number }}</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="loading-spinner"><div class="spinner-border"></div></div>
+      }
+    </div>
+  

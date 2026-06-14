@@ -1,0 +1,117 @@
+<div class="page-container">
+  <div class="row g-4">
+    <div class="col-lg-3">
+      <div class="card-dark p-3 sticky-top" style="top:80px">
+        <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">🔍 Filters</h5>
+
+        <div class="mb-3">
+          <label class="filter-label">Search</label>
+          <input type="text" class="form-control form-control-sm" placeholder="Search products..."
+            [(ngModel)]="filters.search" (input)="onFilterChange()">
+        </div>
+
+        <div class="mb-3">
+          <label class="filter-label">Category</label>
+          <select class="form-select form-select-sm" [(ngModel)]="filters.category" (change)="onFilterChange()">
+            <option value="">All Categories</option>
+            @for (cat of categories(); track cat.id) {
+            <option [value]="cat.slug">{{ cat.icon }} {{ cat.name }}</option>
+            @if (cat.children) {
+            @for (child of cat.children; track child.id) {
+            <option [value]="child.slug">&nbsp;&nbsp;└ {{ child.name }}</option>
+            }
+            }
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="filter-label">Gender</label>
+          <select class="form-select form-select-sm" [(ngModel)]="filters.gender" (change)="onFilterChange()">
+            <option value="">All</option>
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="unisex">Unisex</option>
+            <option value="kids">Kids</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="filter-label">Sort By</label>
+          <select class="form-select form-select-sm" [(ngModel)]="filters.sortBy" (change)="onFilterChange()">
+            <option value="newest">Newest First</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+            <option value="popular">Popular</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="filter-label">Price Range</label>
+          <div class="d-flex gap-2">
+            <input type="number" class="form-control form-control-sm" placeholder="Min" [(ngModel)]="filters.minPrice"
+              (change)="onFilterChange()">
+            <input type="number" class="form-control form-control-sm" placeholder="Max" [(ngModel)]="filters.maxPrice"
+              (change)="onFilterChange()">
+          </div>
+        </div>
+
+        <button class="btn btn-sm btn-outline-glow w-100 mt-2" (click)="clearFilters()">Clear Filters</button>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 style="color:var(--text-primary);font-family:var(--font-heading);font-size:1.4rem">
+          {{ pageTitle() }}
+        </h4>
+        <span style="color:var(--text-muted);font-size:0.85rem">{{ totalCount() }} products</span>
+      </div>
+
+      @if (loading()) {
+      <div class="loading-spinner">
+        <div class="spinner-border"></div>
+      </div>
+      } @else if (products().length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>No products found</h3>
+        <p>Try adjusting your filters or search terms</p>
+        <button class="btn btn-outline-glow" (click)="clearFilters()">Clear Filters</button>
+      </div>
+      } @else {
+      <div class="row g-3">
+        @for (product of products(); track product.id) {
+        <div class="col-6 col-md-4">
+          <a [routerLink]="['/products', product.slug]" class="text-decoration-none">
+            <div class="product-card">
+              <div class="product-image">
+                <img [src]="product.firstImage" [alt]="product.title" loading="lazy">
+                @if (product.discountPercent) {
+                <span class="discount-badge">-{{ product.discountPercent }}%</span>
+                }
+                <button class="wishlist-btn" (click)="$event.preventDefault()">♡</button>
+              </div>
+              <div class="product-info">
+                <p class="product-brand">{{ product.brand }}</p>
+                <h6 class="product-title">{{ product.title }}</h6>
+                <div class="product-rating">
+                  ⭐ {{ product.ratingAverage.toFixed(1) }}
+                  <span class="count">({{ product.ratingCount }})</span>
+                </div>
+                <div class="product-price">
+                  <span class="current">₹{{ product.discountedPrice || product.basePrice }}</span>
+                  @if (product.mrp && product.mrp > (product.discountedPrice || product.basePrice)) {
+                  <span class="original">₹{{ product.mrp }}</span>
+                  }
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+</div>

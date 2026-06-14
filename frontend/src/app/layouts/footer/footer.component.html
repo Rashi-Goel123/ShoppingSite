@@ -1,0 +1,75 @@
+<footer class="py-5 mt-5" style="background:var(--dark-secondary);border-top:1px solid var(--border-color)">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <span style="font-size:1.8rem">👗</span>
+          <span style="
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  ">
+            Fashion Store
+          </span>
+        </div>
+        <p style="color:var(--text-secondary);font-size:0.9rem;max-width:320px">
+          Your ultimate destination for trendy fashion. Discover curated collections from top brands with the best
+          deals.
+        </p>
+        <div class="d-flex gap-3 mt-3">
+          <a href="#" class="social-icon">📘</a>
+          <a href="#" class="social-icon">📸</a>
+          <a href="#" class="social-icon">🐦</a>
+          <a href="#" class="social-icon">📌</a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 class="text-uppercase mb-3"
+          style="color:var(--text-primary);font-family:var(--font-body);font-size:0.8rem;letter-spacing:1.5px">Shop</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a routerLink="/products" [queryParams]="{gender:'men'}">Men's Wear</a></li>
+          <li><a routerLink="/products" [queryParams]="{gender:'women'}">Women's Wear</a></li>
+          <li><a routerLink="/products" [queryParams]="{category:'footwear'}">Footwear</a></li>
+          <li><a routerLink="/products" [queryParams]="{category:'accessories'}">Accessories</a></li>
+          <li><a routerLink="/products">New Arrivals</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 class="text-uppercase mb-3"
+          style="color:var(--text-primary);font-family:var(--font-body);font-size:0.8rem;letter-spacing:1.5px">Account
+        </h6>
+        <ul class="list-unstyled footer-links">
+          <li><a routerLink="/profile">My Profile</a></li>
+          <li><a routerLink="/orders">My Orders</a></li>
+          <li><a routerLink="/wishlist">Wishlist</a></li>
+          <li><a routerLink="/cart">Cart</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-uppercase mb-3"
+          style="color:var(--text-primary);font-family:var(--font-body);font-size:0.8rem;letter-spacing:1.5px">
+          Newsletter</h6>
+        <p style="color:var(--text-secondary);font-size:0.85rem">Get updates on new arrivals & exclusive offers.</p>
+        <div class="input-group">
+          <input type="email" class="form-control" placeholder="Your email"
+            style="border-radius:var(--radius-sm) 0 0 var(--radius-sm)">
+          <button class="btn btn-primary-gradient"
+            style="border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 20px">→</button>
+        </div>
+      </div>
+    </div>
+    <hr style="border-color:var(--border-color);margin:32px 0 16px">
+    <div class="d-flex flex-wrap justify-content-between align-items-center"
+      style="color:var(--text-muted);font-size:0.8rem">
+      <p class="mb-0">© 2026 Fashion Store. All rights reserved.</p>
+      <div class="d-flex gap-3">
+        <a href="#" style="color:var(--text-muted)">Privacy Policy</a>
+        <a href="#" style="color:var(--text-muted)">Terms of Service</a>
+        <a href="#" style="color:var(--text-muted)">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>

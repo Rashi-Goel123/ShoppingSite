@@ -1,0 +1,159 @@
+@if (loading()) {
+<div class="loading-spinner">
+  <div class="spinner-border"></div>
+</div>
+} @else if (product()) {
+<div class="page-container">
+  <nav class="mb-4" style="font-size:0.85rem">
+    <a routerLink="/" style="color:var(--text-muted)">Home</a>
+    <span style="color:var(--text-muted);margin:0 8px">/</span>
+    <a routerLink="/products" style="color:var(--text-muted)">Products</a>
+    <span style="color:var(--text-muted);margin:0 8px">/</span>
+    <span style="color:var(--text-secondary)">{{ product()!.title }}</span>
+  </nav>
+
+  <div class="row g-4 g-lg-5">
+    <div class="col-lg-6">
+      <div class="product-gallery">
+        <div class="main-image mb-3"
+          style="border-radius:var(--radius-lg);overflow:hidden;background:var(--dark-secondary)">
+          <img [src]="selectedImage()" [alt]="product()!.title" style="width:100%;aspect-ratio:3/4;object-fit:cover">
+        </div>
+        <div class="d-flex gap-2">
+          @for (img of product()!.images; track img.id) {
+          <div class="thumb" [class.active]="selectedImage() === img.url" (click)="selectedImage.set(img.url)">
+            <img [src]="img.url" [alt]="product()!.title"
+              style="width:80px;height:80px;object-fit:cover;border-radius:var(--radius-sm)">
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <span class="badge mb-2" style="background:rgba(108,92,231,0.15);color:var(--primary-light);font-size:0.75rem">{{
+        product()!.category.name }}</span>
+      <h1 style="font-size:2rem;margin-bottom:8px">{{ product()!.title }}</h1>
+      <p class="mb-2" style="color:var(--text-muted);font-size:0.9rem">by <strong style="color:var(--text-secondary)">{{
+          product()!.brand }}</strong></p>
+
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span
+          style="background:var(--success);color:white;padding:4px 10px;border-radius:4px;font-size:0.85rem;font-weight:600">
+          ⭐ {{ product()!.ratingAverage.toFixed(1) }}
+        </span>
+        <span style="color:var(--text-muted);font-size:0.85rem">{{ product()!.ratingCount }} ratings</span>
+      </div>
+      <div class="mb-4 pb-3" style="border-bottom:1px solid var(--border-color)">
+        <div class="d-flex align-items-baseline gap-3">
+          <span style="font-size:2rem;font-weight:800;color:var(--text-primary)">₹{{ selectedVariant()?.price ||
+            product()!.basePrice }}</span>
+          @if (selectedVariant() && selectedVariant()!.mrp > selectedVariant()!.price) {
+          <span style="font-size:1.1rem;color:var(--text-muted);text-decoration:line-through">₹{{ selectedVariant()!.mrp
+            }}</span>
+          <span style="color:var(--success);font-weight:600;font-size:1rem">
+            {{ getDiscount() }}% OFF
+          </span>
+          }
+        </div>
+        <p style="color:var(--success);font-size:0.85rem;margin:4px 0 0">Inclusive of all taxes</p>
+      </div>
+      @if (colors().length > 0) {
+      <div class="mb-4">
+        <label class="filter-label mb-2">Color: <strong style="color:var(--text-primary)">{{ selectedColor()
+            }}</strong></label>
+        <div class="d-flex gap-2 flex-wrap">
+          @for (color of colors(); track color) {
+          <div class="color-swatch" [class.active]="selectedColor() === color"
+            [class.light]="isLightColor(getColorHex(color))" [style.background]="getColorHex(color)"
+            (click)="selectColor(color)">
+          </div>
+          }
+        </div>
+      </div>
+      }
+      @if (sizes().length > 0) {
+      <div class="mb-4">
+        <label class="filter-label mb-2">Size:</label>
+        <div class="d-flex gap-2 flex-wrap">
+          @for (size of sizes(); track size) {
+          <button class="size-chip" [class.active]="selectedSize() === size" [class.out-of-stock]="getStock(size) === 0"
+            (click)="selectSize(size)">
+            {{ size }}
+          </button>
+          }
+        </div>
+      </div>
+      }
+      @if (selectedVariant()) {
+      <p class="mb-3"
+        [style.color]="selectedVariant()!.stock > 10 ? 'var(--success)' : selectedVariant()!.stock > 0 ? 'var(--warning)' : 'var(--danger)'"
+        style="font-size:0.85rem;font-weight:500">
+        {{ selectedVariant()!.stock > 10 ? '✓ In Stock' : selectedVariant()!.stock > 0 ? '⚠ Only ' +
+        selectedVariant()!.stock + ' left!' : '✗ Out of Stock' }}
+      </p>
+      }
+      <div class="d-flex gap-3 mb-4">
+        <button class="btn btn-primary-gradient flex-grow-1 py-3" (click)="addToCart()"
+          [disabled]="!selectedVariant() || selectedVariant()!.stock === 0">
+          🛒 Add to Cart
+        </button>
+        <button class="btn btn-outline-glow px-4 py-3" title="Wishlist">♡</button>
+      </div>
+      <div class="card-dark p-3 mb-3">
+        <h6 style="color:var(--text-primary);font-size:0.9rem;margin-bottom:8px">Description</h6>
+        <p style="color:var(--text-secondary);font-size:0.88rem;margin:0">{{ product()!.description }}</p>
+      </div>
+
+      @if (product()!.material) {
+      <div class="card-dark p-3">
+        <h6 style="color:var(--text-primary);font-size:0.9rem;margin-bottom:8px">Details</h6>
+        <table style="width:100%;font-size:0.85rem">
+          <tr>
+            <td style="color:var(--text-muted);padding:4px 0;width:40%">Material</td>
+            <td style="color:var(--text-secondary)">{{ product()!.material }}</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-muted);padding:4px 0">Gender</td>
+            <td style="color:var(--text-secondary);text-transform:capitalize">{{ product()!.gender }}</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-muted);padding:4px 0">Brand</td>
+            <td style="color:var(--text-secondary)">{{ product()!.brand }}</td>
+          </tr>
+        </table>
+      </div>
+      }
+    </div>
+  </div>
+  @if (product()!.reviews && product()!.reviews!.length > 0) {
+  <div class="mt-5">
+    <h3 style="font-size:1.4rem;margin-bottom:20px">Customer Reviews</h3>
+    <div class="row g-3">
+      @for (review of product()!.reviews!; track review.id) {
+      <div class="col-md-6">
+        <div class="card-dark p-3">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <div>
+              <span style="color:var(--warning)">{{ '⭐'.repeat(review.rating) }}</span>
+              @if (review.title) {
+              <h6 style="margin:4px 0 0;font-size:0.9rem;color:var(--text-primary);font-family:var(--font-body)">{{
+                review.title }}</h6>
+              }
+            </div>
+            @if (review.isVerifiedPurchase) {
+            <span class="badge" style="background:rgba(46,160,67,0.15);color:var(--success);font-size:0.7rem">✓
+              Verified</span>
+            }
+          </div>
+          @if (review.comment) {
+          <p style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:8px">{{ review.comment }}</p>
+          }
+          <span style="color:var(--text-muted);font-size:0.75rem">{{ review.userName }}</span>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+</div>
+}

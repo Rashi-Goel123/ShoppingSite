@@ -1,0 +1,28 @@
+
+    <div class="login-page">
+      <div class="login-card card-glass">
+        <div class="text-center mb-4">
+          <span style="font-size:3rem">🔑</span>
+          <h2 class="mt-2" style="color:var(--text-primary);font-family:var(--font-heading)">Admin Registration</h2>
+          <p style="color:var(--text-muted);font-size:0.85rem">Requires a valid invite code</p>
+        </div>
+        <div class="mb-3"><input type="text" class="form-control" placeholder="Full Name" [(ngModel)]="name"></div>
+        <div class="mb-3"><input type="email" class="form-control" placeholder="Email" [(ngModel)]="email"></div>
+        <div class="mb-3"><input type="tel" class="form-control" placeholder="Phone" [(ngModel)]="phone" maxlength="10"></div>
+        <div class="mb-3"><input type="password" class="form-control" placeholder="Password" [(ngModel)]="password"></div>
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Invite Code" [(ngModel)]="inviteCode" style="text-transform:uppercase">
+          <small style="color:var(--text-muted)">Default: <strong>ADMIN-SETUP-2026</strong></small>
+        </div>
+        <button class="btn btn-primary-gradient w-100 py-3" (click)="register()" [disabled]="loading()">
+          {{ loading() ? 'Creating...' : 'Create Admin Account' }}
+        </button>
+        @if (error()) {
+          <div class="alert mt-3 py-2 text-center" style="background:rgba(248,81,73,0.1);color:var(--danger);border-radius:var(--radius-sm);font-size:0.85rem">{{ error() }}</div>
+        }
+        <div class="text-center mt-3">
+          <a routerLink="/admin/login" style="color:var(--primary-light);font-size:0.85rem">← Back to Login</a>
+        </div>
+      </div>
+    </div>
+  

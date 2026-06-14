@@ -1,0 +1,81 @@
+
+    <div class="page-container">
+      <h2 class="mb-4" style="font-size:1.6rem">👤 My Profile</h2>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="card-dark p-4 text-center">
+            <div class="profile-avatar mx-auto mb-3">
+              @if (auth.user()?.avatar) {
+                <img [src]="auth.user()!.avatar" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover">
+              } @else {
+                <span>{{ auth.user()?.name?.charAt(0) || '?' }}</span>
+              }
+            </div>
+            <h5 style="color:var(--text-primary);margin-bottom:4px">{{ auth.user()?.name }}</h5>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:16px">+91 {{ auth.user()?.phone }}</p>
+            <h6 style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:12px">Choose an Avatar</h6>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+              @for (avatar of presetAvatars; track avatar) {
+                <img [src]="avatar" (click)="selectAvatar(avatar)"
+                     class="preset-avatar" [class.active]="auth.user()?.avatar === avatar"
+                     style="width:48px;height:48px;border-radius:50%;cursor:pointer;border:2px solid transparent">
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card-dark p-4 mb-4">
+            <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">Edit Profile</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" style="color:var(--text-muted);font-size:0.82rem">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="name">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" style="color:var(--text-muted);font-size:0.82rem">Email</label>
+                <input type="email" class="form-control" [(ngModel)]="email">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" style="color:var(--text-muted);font-size:0.82rem">Phone</label>
+                <input type="text" class="form-control" [value]="auth.user()?.phone" disabled style="opacity:0.6">
+              </div>
+            </div>
+            <button class="btn btn-primary-gradient mt-3 px-4" (click)="saveProfile()">Save Changes</button>
+            @if (saved()) { <span style="color:var(--success);font-size:0.85rem;margin-left:12px">✓ Saved!</span> }
+          </div>
+          <div class="card-dark p-4 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 style="color:var(--text-primary);font-size:1rem;margin:0">📍 Addresses</h5>
+              <button class="btn btn-sm btn-outline-glow" (click)="toggleAddAddress()">+ Add</button>
+            </div>
+            @if (showAddAddress()) {
+              <div class="card-glass p-3 mb-3">
+                <div class="row g-2">
+                  <div class="col-md-4"><input class="form-control form-control-sm" placeholder="Label (Home/Work)" [(ngModel)]="newAddr.label"></div>
+                  <div class="col-md-8"><input class="form-control form-control-sm" placeholder="Street Address" [(ngModel)]="newAddr.street"></div>
+                  <div class="col-md-4"><input class="form-control form-control-sm" placeholder="City" [(ngModel)]="newAddr.city"></div>
+                  <div class="col-md-4"><input class="form-control form-control-sm" placeholder="State" [(ngModel)]="newAddr.state"></div>
+                  <div class="col-md-4"><input class="form-control form-control-sm" placeholder="Pincode" [(ngModel)]="newAddr.pincode"></div>
+                </div>
+                <button class="btn btn-primary-gradient btn-sm mt-2" (click)="addAddress()">Save Address</button>
+              </div>
+            }
+            @for (addr of addresses(); track addr.id) {
+              <div class="d-flex justify-content-between align-items-start p-3 mb-2" style="border:1px solid var(--border-color);border-radius:var(--radius-sm)">
+                <div>
+                  <strong style="color:var(--text-primary);font-size:0.9rem">{{ addr.label }}</strong>
+                  @if (addr.isDefault) { <span class="badge ms-2" style="background:rgba(108,92,231,0.15);color:var(--primary-light);font-size:0.65rem">Default</span> }
+                  <p style="color:var(--text-secondary);font-size:0.82rem;margin:4px 0 0">{{ addr.street }}, {{ addr.city }}, {{ addr.state }} - {{ addr.pincode }}</p>
+                </div>
+                <button class="btn btn-sm" style="color:var(--danger);font-size:0.8rem" (click)="deleteAddress(addr.id)">✕</button>
+              </div>
+            }
+          </div>
+          <div class="card-dark p-4">
+            <h5 style="color:var(--danger);font-size:1rem;margin-bottom:12px">⚠️ Account</h5>
+            <button class="btn btn-outline-glow" style="border-color:var(--danger);color:var(--danger)" (click)="auth.logout()">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  

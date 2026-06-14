@@ -1,0 +1,189 @@
+<div class="page-container">
+  <h2 class="mb-4" style="font-size:1.6rem">📋 Checkout</h2>
+
+  @if (cart.items().length === 0 && !paymentSuccess()) {
+  <div class="empty-state">
+    <div class="empty-icon">🛒</div>
+    <h3>Your cart is empty</h3>
+    <p>Add some products before checking out</p>
+  </div>
+  } @else {
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card-dark p-4 mb-4">
+        <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">📍 Delivery Address</h5>
+        @if (addresses().length === 0 && !showNewAddress()) {
+        <div class="card-glass p-3 text-center" style="color:var(--text-muted);font-size:0.9rem">
+          <p class="mb-2">No saved addresses</p>
+          <button class="btn btn-sm btn-outline-glow" (click)="showNewAddress.set(true)">+ Add Address</button>
+        </div>
+        }
+        @for (addr of addresses(); track addr.id) {
+        <div class="address-option p-3 mb-2" [class.selected]="selectedAddressId() === addr.id"
+          (click)="selectedAddressId.set(addr.id)">
+          <div class="d-flex justify-content-between">
+            <strong style="color:var(--text-primary);font-size:0.9rem">{{ addr.label }}</strong>
+            @if (addr.isDefault) { <span class="badge"
+              style="background:rgba(108,92,231,0.15);color:var(--primary-light);font-size:0.7rem">Default</span> }
+          </div>
+          <p style="color:var(--text-secondary);font-size:0.85rem;margin:4px 0 0">{{ addr.street }}, {{ addr.city }}, {{
+            addr.state }} - {{ addr.pincode }}</p>
+        </div>
+        }
+        @if (showNewAddress()) {
+        <div class="card-glass p-3 mt-2">
+          <div class="row g-2">
+            <div class="col-md-4"><input class="form-control form-control-sm" placeholder="Label (Home/Work)"
+                [(ngModel)]="newAddr.label"></div>
+            <div class="col-md-8"><input class="form-control form-control-sm" placeholder="Street Address"
+                [(ngModel)]="newAddr.street"></div>
+            <div class="col-md-4"><input class="form-control form-control-sm" placeholder="City"
+                [(ngModel)]="newAddr.city"></div>
+            <div class="col-md-4"><input class="form-control form-control-sm" placeholder="State"
+                [(ngModel)]="newAddr.state"></div>
+            <div class="col-md-4"><input class="form-control form-control-sm" placeholder="Pincode"
+                [(ngModel)]="newAddr.pincode"></div>
+          </div>
+          <div class="d-flex gap-2 mt-2">
+            <button class="btn btn-primary-gradient btn-sm" (click)="saveNewAddress()">Save & Use</button>
+            <button class="btn btn-sm" style="color:var(--text-muted)"
+              (click)="showNewAddress.set(false)">Cancel</button>
+          </div>
+        </div>
+        } @else if (addresses().length > 0) {
+        <button class="btn btn-sm mt-2" style="color:var(--primary-light);font-size:0.82rem"
+          (click)="showNewAddress.set(true)">+ Add New Address</button>
+        }
+      </div>
+      <div class="card-dark p-4 mb-4">
+        <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:12px">🎟️ Coupon Code</h5>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Enter coupon code" [(ngModel)]="couponCode"
+            style="text-transform:uppercase" (keyup.enter)="applyCoupon()">
+          <button class="btn btn-outline-glow" (click)="applyCoupon()" [disabled]="!couponCode.trim()">Apply</button>
+        </div>
+        @if (couponResult()) {
+        <div class="mt-2 d-flex align-items-center gap-2">
+          <span [style.color]="couponResult()!.isValid ? 'var(--success)' : 'var(--danger)'" style="font-size:0.85rem">
+            {{ couponResult()!.isValid ? '✓' : '✗' }} {{ couponResult()!.message }}
+          </span>
+          @if (couponResult()!.isValid) {
+          <button class="btn btn-sm" style="color:var(--danger);font-size:0.75rem"
+            (click)="removeCoupon()">Remove</button>
+          }
+        </div>
+        }
+        <div class="mt-2">
+          <small style="color:var(--text-muted);font-size:0.75rem">Try: WELCOME50, FLAT20, MEGA30, FASHION15</small>
+        </div>
+      </div>
+      <div class="card-dark p-4">
+        <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:12px">💳 Payment Method</h5>
+        <div class="address-option p-3 mb-2" [class.selected]="paymentMethod() === 'razorpay'"
+          (click)="paymentMethod.set('razorpay')">
+          <div class="d-flex align-items-center gap-3">
+            <div class="radio-dot" [class.active]="paymentMethod() === 'razorpay'"></div>
+            <div class="flex-grow-1">
+              <strong style="color:var(--text-primary);font-size:0.9rem">💳 Razorpay</strong>
+              <p style="color:var(--text-muted);font-size:0.78rem;margin:2px 0 0">Credit/Debit Card, UPI, Netbanking,
+                Wallets</p>
+            </div>
+          </div>
+        </div>
+        <div class="address-option p-3" [class.selected]="paymentMethod() === 'cod'" (click)="paymentMethod.set('cod')">
+          <div class="d-flex align-items-center gap-3">
+            <div class="radio-dot" [class.active]="paymentMethod() === 'cod'"></div>
+            <div>
+              <strong style="color:var(--text-primary);font-size:0.9rem">💵 Cash on Delivery</strong>
+              <p style="color:var(--text-muted);font-size:0.78rem;margin:2px 0 0">Pay when you receive your order</p>
+            </div>
+          </div>
+        </div>
+        @if (paymentMethod() === 'razorpay') {
+        <div class="card-glass p-3 mt-3" style="font-size:0.82rem;color:var(--text-secondary)">
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <span style="color:var(--success);font-size:1rem">🔒</span>
+            <strong style="color:var(--text-primary)">Secure Payment via Razorpay</strong>
+          </div>
+          <p style="margin:0">Clicking "Pay" will open the <strong>real Razorpay checkout popup</strong> with test mode
+            enabled.</p>
+          <div class="mt-2 p-2" style="background:rgba(108,92,231,0.08);border-radius:6px;font-size:0.75rem">
+            <p style="margin:0 0 4px;color:var(--primary-light);font-weight:600">🧪 Test Card Details:</p>
+            <p style="margin:0;color:var(--text-muted)">Card: <code
+                style="color:var(--accent)">4111 1111 1111 1111</code></p>
+            <p style="margin:0;color:var(--text-muted)">Expiry: Any future date · CVV: Any 3 digits</p>
+            <p style="margin:0;color:var(--text-muted)">UPI: <code
+                style="color:var(--accent)">success&#64;razorpay</code></p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card-dark p-4 sticky-top" style="top:80px">
+        <h5 style="color:var(--text-primary);font-size:1rem;margin-bottom:16px">🛍️ Order Summary</h5>
+        @for (item of cart.items(); track item.variantId) {
+        <div class="d-flex gap-2 mb-3 pb-3" style="border-bottom:1px solid var(--border-color)">
+          <img [src]="item.image" style="width:50px;height:60px;object-fit:cover;border-radius:6px">
+          <div class="flex-grow-1">
+            <p style="color:var(--text-primary);font-size:0.82rem;margin:0;line-height:1.3">{{ item.title }}</p>
+            <p style="color:var(--text-muted);font-size:0.75rem;margin:2px 0">{{ item.color }} · {{ item.size }} × {{
+              item.quantity }}</p>
+          </div>
+          <span style="color:var(--text-primary);font-weight:600;font-size:0.9rem;white-space:nowrap">₹{{ item.price *
+            item.quantity }}</span>
+        </div>
+        }
+
+        <div class="price-row"><span>Subtotal ({{ cart.items().length }} items)</span><span>₹{{ cart.subtotal()
+            }}</span></div>
+        @if (couponDiscount() > 0) {
+        <div class="price-row" style="color:var(--success)"><span>Coupon ({{ couponCode.toUpperCase()
+            }})</span><span>-₹{{ couponDiscount() }}</span></div>
+        }
+        @if (cart.savings() > 0) {
+        <div class="price-row" style="color:var(--success)"><span>MRP Savings</span><span>-₹{{ cart.savings() }}</span>
+        </div>
+        }
+        <div class="price-row">
+          <span>Delivery</span>
+          <span [style.color]="getDeliveryCharge() === 0 ? 'var(--success)' : ''">{{ getDeliveryCharge() === 0 ? 'FREE'
+            : '₹' + getDeliveryCharge() }}</span>
+        </div>
+        <hr style="border-color:var(--border-color)">
+        <div class="d-flex justify-content-between mb-1" style="font-size:1.3rem;font-weight:800">
+          <span>Total</span><span style="color:var(--primary-light)">₹{{ getTotal() }}</span>
+        </div>
+        @if (getTotalSavings() > 0) {
+        <p style="color:var(--success);font-size:0.8rem;margin:4px 0 16px;text-align:right">You save ₹{{
+          getTotalSavings() }} on this order 🎉</p>
+        }
+        <button class="btn btn-primary-gradient w-100 py-3" id="place-order-btn"
+          style="font-size:1.05rem;font-weight:700;letter-spacing:0.5px" (click)="placeOrder()"
+          [disabled]="placing() || !selectedAddressId()">
+          @if (placing()) {
+          <span class="spinner-border spinner-border-sm me-2"></span> {{ paymentStep() }}
+          } @else if (paymentMethod() === 'razorpay') {
+          🔒 Pay ₹{{ getTotal() }} with Razorpay
+          } @else {
+          📦 Place Order (COD)
+          }
+        </button>
+
+        @if (!selectedAddressId()) {
+        <p style="color:var(--warning);font-size:0.78rem;text-align:center;margin:8px 0 0">⚠️ Please select a delivery
+          address</p>
+        }
+
+        @if (error()) {
+        <div class="alert mt-3 py-2 text-center"
+          style="background:rgba(248,81,73,0.1);border:1px solid var(--danger);color:var(--danger);border-radius:var(--radius-sm);font-size:0.85rem">
+          ✗ {{ error() }}
+        </div>
+        }
+
+      </div>
+    </div>
+  </div>
+  }
+</div>
