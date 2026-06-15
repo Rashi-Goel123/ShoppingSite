@@ -82,9 +82,18 @@ builder.Services.AddSwaggerGen(options =>
         Description = "JWT Authorization header. Enter ONLY your token (without 'Bearer ' prefix). Example: eyJhbGci...",
         In = Microsoft.OpenApi.ParameterLocation.Header,
         Type = Microsoft.OpenApi.SecuritySchemeType.Http,
-        Scheme = "bearer",
+        Scheme = "bearer"
     });
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
+
+    options.AddSecurityRequirement(document => new Microsoft.OpenApi.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.OpenApiSecuritySchemeReference("Bearer"),
+            new System.Collections.Generic.List<string>()
+        }
+    });
+
+    options.OperationFilter<CustomAuthHeaderOperationFilter>();
 });
 
 var app = builder.Build();
@@ -105,45 +114,54 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/uploads"
 });
 
+app.Use(async (context, next) =>
+{
+    if (context.Request.Headers.TryGetValue("X-Authorization", out var token))
+    {
+        context.Request.Headers["Authorization"] = token;
+    }
+    await next();
+});
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 // SignalR Hubs
-app.MapHub<ChatHub>("/hubs/chat");
-app.MapHub<OrderTrackingHub>("/hubs/orders");
-app.MapHub<NotificationHub>("/hubs/notifications");
+app.MapHub<EcommerceApi.Hubs.ChatHub>("/hubs/chat");
+app.MapHub<EcommerceApi.Hubs.OrderTrackingHub>("/hubs/orders");
+app.MapHub<EcommerceApi.Hubs.NotificationHub>("/hubs/notifications");
 
 // === DATABASE MIGRATION & SEED ===
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var db = scope.ServiceProvider.GetRequiredService<EcommerceApi.Data.AppDbContext>();
     await db.Database.MigrateAsync();
-    await DatabaseSeeder.SeedAsync(db);
+    await EcommerceApi.Seeds.DatabaseSeeder.SeedAsync(db);
 }
 
 app.Run();
 
-public class SecurityRequirementsOperationFilter : Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter
+public class CustomAuthHeaderOperationFilter : Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter
 {
     public void Apply(Microsoft.OpenApi.OpenApiOperation operation, Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext context)
     {
         var hasAuthorize = System.Linq.Enumerable.Any(System.Linq.Enumerable.OfType<Microsoft.AspNetCore.Authorization.AuthorizeAttribute>(context.MethodInfo.DeclaringType!.GetCustomAttributes(true))) ||
                            System.Linq.Enumerable.Any(System.Linq.Enumerable.OfType<Microsoft.AspNetCore.Authorization.AuthorizeAttribute>(context.MethodInfo.GetCustomAttributes(true)));
 
-        if (hasAuthorize)
-        {
-            if (operation.Security == null)
-                operation.Security = new System.Collections.Generic.List<Microsoft.OpenApi.OpenApiSecurityRequirement>();
+        if (!hasAuthorize) return;
 
-            var scheme = new Microsoft.OpenApi.OpenApiSecuritySchemeReference("Bearer");
-            var requirement = new Microsoft.OpenApi.OpenApiSecurityRequirement
-            {
-                { scheme, new System.Collections.Generic.List<string>() }
-            };
-            operation.Security.Add(requirement);
-        }
+        if (operation.Parameters == null)
+            operation.Parameters = new System.Collections.Generic.List<Microsoft.OpenApi.IOpenApiParameter>();
+
+        operation.Parameters.Add(new Microsoft.OpenApi.OpenApiParameter
+        {
+            Name = "X-Authorization",
+            In = Microsoft.OpenApi.ParameterLocation.Header,
+            Description = "Swagger UI blocks 'Authorization'. Enter 'Bearer {token}' here instead.",
+            Required = false
+        });
     }
 }
 

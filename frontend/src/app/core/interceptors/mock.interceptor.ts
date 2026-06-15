@@ -1,24 +1,52 @@
-import { HttpInterceptorFn, HttpResponse } from '@angular/common/http';
+import { HttpInterceptorFn, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { catchError, delay } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MOCK_PRODUCTS, MOCK_PRODUCTS_DETAIL } from '../../mock-data/mock-products';
 import { MOCK_CATEGORIES } from '../../mock-data/mock-categories';
 import { MOCK_ORDERS } from '../../mock-data/mock-orders';
 import { MOCK_COUPONS } from '../../mock-data/mock-coupons';
 
+/**
+ * Mock/Fallback interceptor.
+ * - When useMockData is true: always returns mock data (skip real API).
+ * - When useMockData is false: tries real API first, falls back to mock data on error.
+ */
 export const mockInterceptor: HttpInterceptorFn = (req, next) => {
-  if (!environment.useMockData) return next(req);
+  // If force-mock mode, return mock data directly
+  if (environment.useMockData) {
+    const mockResponse = getMockResponse(req);
+    if (mockResponse) return mockResponse;
+    return next(req);
+  }
 
+  // Normal mode: try real API first, fallback to mock on error
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      console.warn(`[API Fallback] ${req.method} ${req.url} failed with ${error.status || 'network error'}, trying mock data...`);
+      const mockResponse = getMockResponse(req);
+      if (mockResponse) return mockResponse;
+      // No mock available for this route — rethrow the original error
+      throw error;
+    })
+  );
+};
+
+function getMockResponse(req: any) {
   const url = req.url.replace(environment.apiUrl, '');
   const queryStr = req.params.keys().length > 0 ? '?' + req.params.toString() : '';
   const fullUrl = url + queryStr;
   const method = req.method;
+
+  // Payments always go to real API, no mock fallback
   if (url.startsWith('/payments/')) {
-    return next(req);
+    return null;
   }
+
   const respond = (body: any, status = 200) =>
     of(new HttpResponse({ status, body })).pipe(delay(300));
+
+  // === AUTH ===
   if (url === '/auth/send-otp' && method === 'POST')
     return respond({ message: 'OTP sent successfully', dev_otp: '123456' });
   if (url === '/auth/verify-otp' && method === 'POST')
@@ -41,6 +69,8 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (url === '/auth/me' && method === 'GET')
     return respond({ id: 1, phone: '9876543210', name: 'Fashion User', email: 'user@example.com', avatar: null, role: 'user' });
+
+  // === PRODUCTS ===
   if (url === '/products/categories' && method === 'GET')
     return respond(MOCK_CATEGORIES);
   if (url === '/products/featured' && method === 'GET')
@@ -111,12 +141,16 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
 
     return respond({ items: filtered, totalCount: filtered.length, page: 1, pageSize: 12, totalPages: 1 });
   }
+
+  // === CART ===
   if (url === '/cart' && method === 'GET')
     return respond([]);
   if (url === '/cart/add' && method === 'POST')
     return respond({ message: 'Added to cart' });
   if (url === '/cart/count' && method === 'GET')
     return respond({ count: 0 });
+
+  // === COUPONS ===
   if (url === '/coupons/available' && method === 'GET')
     return respond(MOCK_COUPONS);
   if (url === '/coupons/validate' && method === 'POST') {
@@ -126,6 +160,8 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
       return respond({ isValid: true, message: `Coupon applied! You save ₹${coupon.value}`, discountAmount: coupon.value, code: coupon.code });
     return respond({ isValid: false, message: 'Invalid coupon', discountAmount: 0, code: body?.code });
   }
+
+  // === USERS ===
   if (url === '/users/addresses' && method === 'GET')
     return respond([
       { id: 1, label: 'Home', street: '123 MG Road', city: 'Mumbai', state: 'Maharashtra', pincode: '400001', isDefault: true },
@@ -147,6 +183,8 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (url === '/users/notifications' && method === 'GET')
     return respond([]);
+
+  // === PAYMENTS ===
   if (url === '/payments/create-order' && method === 'POST') {
     const body = req.body as any;
     const amountInPaise = Math.round((body?.amount || 0) * 100);
@@ -159,6 +197,8 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
   }
   if (url === '/payments/verify' && method === 'POST')
     return respond({ verified: true, message: 'Payment verified successfully' });
+
+  // === ORDERS ===
   if (url === '/orders' && method === 'POST') {
     const body = req.body as any;
     const newId = MOCK_ORDERS.length > 0 ? Math.max(...MOCK_ORDERS.map(o => o.id)) + 1 : 1;
@@ -209,6 +249,8 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
 
   if (url.match(/^\/orders\/\d+\/cancel$/) && method === 'POST')
     return respond({ message: 'Order cancelled successfully' });
+
+  // === ADMIN ===
   if (url === '/admin/dashboard' && method === 'GET')
     return respond({
       totalRevenue: 125000, totalOrders: 48, totalUsers: 156, totalProducts: MOCK_PRODUCTS.length,
@@ -216,5 +258,7 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
       recentOrders: MOCK_ORDERS.slice(0, 5),
       topProducts: MOCK_PRODUCTS.slice(0, 5).map((p, i) => ({ productId: p.id, title: p.title, image: p.firstImage, totalSold: 50 - i * 8, totalRevenue: (50 - i * 8) * p.basePrice }))
     });
-  return next(req);
-};
+
+  // No mock available for this route
+  return null;
+}
