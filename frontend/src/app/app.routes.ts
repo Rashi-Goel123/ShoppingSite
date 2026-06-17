@@ -15,6 +15,16 @@ export const routes: Routes = [
   { path: 'order-success/:id', loadComponent: () => import('./features/orders/order-success/order-success.component').then(m => m.OrderSuccessComponent), canActivate: [authGuard] },
   { path: 'profile', loadComponent: () => import('./features/profile/profile.component').then(m => m.ProfileComponent), canActivate: [authGuard] },
   { path: 'wishlist', loadComponent: () => import('./features/wishlist/wishlist.component').then(m => m.WishlistComponent), canActivate: [authGuard] },
-  { path: 'admin', loadComponent: () => import('./features/admin/dashboard/dashboard.component').then(m => m.DashboardComponent), canActivate: [adminGuard] },
+  { 
+    path: 'admin', 
+    loadComponent: () => import('./features/admin/admin-layout/admin-layout.component').then(m => m.AdminLayoutComponent), 
+    canActivate: [adminGuard],
+    children: [
+      { path: '', loadComponent: () => import('./features/admin/dashboard/dashboard.component').then(m => m.DashboardComponent) },
+      { path: 'products', loadComponent: () => import('./features/admin/products/admin-product-list/admin-product-list.component').then(m => m.AdminProductListComponent) },
+      { path: 'products/add', loadComponent: () => import('./features/admin/products/admin-product-form/admin-product-form.component').then(m => m.AdminProductFormComponent) },
+      { path: 'coupons', loadComponent: () => import('./features/admin/coupons/admin-coupon-list/admin-coupon-list.component').then(m => m.AdminCouponListComponent) }
+    ]
+  },
   { path: '**', redirectTo: '' }
 ];

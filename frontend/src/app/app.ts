@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { ChatbotComponent } from './features/chatbot/chatbot.component';
 import { ToastComponent } from './shared/components/toast/toast.component';
 import { CartDrawerComponent } from './shared/components/cart-drawer/cart-drawer.component';
+import { AuthService } from './core/services/auth.service';
+import { CartService } from './core/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -21,4 +23,13 @@ import { CartDrawerComponent } from './shared/components/cart-drawer/cart-drawer
   `,
   styles: `main { min-height: calc(100vh - 160px); }`
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private auth = inject(AuthService);
+  private cart = inject(CartService);
+
+  ngOnInit() {
+    if (this.auth.isLoggedIn()) {
+      this.cart.loadCart();
+    }
+  }
+}

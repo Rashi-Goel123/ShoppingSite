@@ -31,13 +31,13 @@
             </div>
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center gap-2">
-                <button class="qty-btn" (click)="updateQty(item.variantId, item.quantity - 1)">−</button>
+                <button class="qty-btn" (click)="updateQty(item, item.quantity - 1)">−</button>
                 <span style="min-width:32px;text-align:center;font-weight:600">{{ item.quantity }}</span>
-                <button class="qty-btn" (click)="updateQty(item.variantId, item.quantity + 1)"
+                <button class="qty-btn" (click)="updateQty(item, item.quantity + 1)"
                   [disabled]="item.quantity >= item.stock">+</button>
               </div>
               <button class="btn btn-sm" style="color:var(--danger);font-size:0.8rem"
-                (click)="removeItem(item.variantId)">✕ Remove</button>
+                (click)="removeItem(item)">✕ Remove</button>
             </div>
           </div>
         </div>

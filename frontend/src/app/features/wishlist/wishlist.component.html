@@ -1,11 +1,53 @@
+<div class="page-container">
+  <h2 class="mb-4" style="font-size:1.6rem">♡ My Wishlist</h2>
 
-    <div class="page-container">
-      <h2 class="mb-4" style="font-size:1.6rem">♡ My Wishlist</h2>
-      <div class="empty-state">
-        <div class="empty-icon">♡</div>
-        <h3>Your wishlist is empty</h3>
-        <p>Save items you love by clicking the heart icon on products</p>
-        <a routerLink="/products" class="btn btn-primary-gradient">Browse Products</a>
+  @if (loading()) {
+  <div class="loading-spinner">
+    <div class="spinner-border"></div>
+  </div>
+  } @else if (items().length === 0) {
+  <div class="empty-state">
+    <div class="empty-icon">♡</div>
+    <h3>Your wishlist is empty</h3>
+    <p>Save items you love by clicking the heart icon on products</p>
+    <a routerLink="/products" class="btn btn-primary-gradient">Browse Products</a>
+  </div>
+  } @else {
+  <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px">{{ items().length }} item(s) saved</p>
+  <div class="row g-3">
+    @for (product of items(); track product.id) {
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="product-card">
+        <a [routerLink]="['/products', product.slug]" class="text-decoration-none">
+          <div class="product-image">
+            <img [src]="product.firstImage" [alt]="product.title" loading="lazy">
+            @if (product.discountPercent) {
+            <span class="discount-badge">-{{ product.discountPercent }}%</span>
+            }
+          </div>
+          <div class="product-info">
+            <p class="product-brand">{{ product.brand }}</p>
+            <h6 class="product-title">{{ product.title }}</h6>
+            <div class="product-rating">
+              ⭐ {{ product.ratingAverage.toFixed(1) }}
+              <span class="count">({{ product.ratingCount }})</span>
+            </div>
+            <div class="product-price">
+              <span class="current">₹{{ product.discountedPrice || product.basePrice }}</span>
+              @if (product.mrp && product.mrp > (product.discountedPrice || product.basePrice)) {
+              <span class="original">₹{{ product.mrp }}</span>
+              }
+            </div>
+          </div>
+        </a>
+        <button class="btn btn-sm w-100 mt-2"
+          style="color:var(--danger);border:1px solid rgba(248,81,73,0.2);border-radius:var(--radius-sm);font-size:0.82rem"
+          (click)="removeFromWishlist(product.id)">
+          ✕ Remove from Wishlist
+        </button>
       </div>
     </div>
-  
+    }
+  </div>
+  }
+</div>

@@ -1,6 +1,6 @@
 export const MOCK_ORDERS = [
   {
-    id: 1, orderNumber: 'ORD-20260610-1234', status: 'delivered', paymentStatus: 'paid',
+    id: 1, orderNumber: 'ORD-20260610-1234', userName: 'John Doe', status: 'delivered', paymentStatus: 'paid',
     totalAmount: 2548, itemCount: 2, firstItemImage: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=200',
     createdAt: '2026-06-10T10:30:00Z', paymentMethod: 'razorpay', subtotal: 2598, discount: 50, deliveryCharge: 0,
     couponCode: 'WELCOME50',
@@ -20,7 +20,7 @@ export const MOCK_ORDERS = [
     estimatedDelivery: '2026-06-15T00:00:00Z'
   },
   {
-    id: 2, orderNumber: 'ORD-20260612-5678', status: 'shipped', paymentStatus: 'paid',
+    id: 2, orderNumber: 'ORD-20260612-5678', userName: 'Jane Smith', status: 'shipped', paymentStatus: 'paid',
     totalAmount: 1999, itemCount: 1, firstItemImage: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=200',
     createdAt: '2026-06-12T15:20:00Z', paymentMethod: 'razorpay', subtotal: 1999, discount: 0, deliveryCharge: 0,
     shippingAddress: { id: 1, label: 'Home', street: '123 MG Road', city: 'Mumbai', state: 'Maharashtra', pincode: '400001', isDefault: true },
@@ -35,7 +35,7 @@ export const MOCK_ORDERS = [
     estimatedDelivery: '2026-06-17T00:00:00Z'
   },
   {
-    id: 3, orderNumber: 'ORD-20260613-9012', status: 'placed', paymentStatus: 'pending',
+    id: 3, orderNumber: 'ORD-20260613-9012', userName: 'Alice Johnson', status: 'placed', paymentStatus: 'pending',
     totalAmount: 4498, itemCount: 2, firstItemImage: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=200',
     createdAt: '2026-06-13T09:00:00Z', paymentMethod: 'cod', subtotal: 4498, discount: 0, deliveryCharge: 0,
     shippingAddress: { id: 2, label: 'Work', street: '456 Brigade Road', city: 'Bangalore', state: 'Karnataka', pincode: '560001', isDefault: false },

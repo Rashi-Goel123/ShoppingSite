@@ -111,6 +111,22 @@
         </div>
         }
       </div>
+
+      <!-- Infinite scroll sentinel -->
+      <div #scrollSentinel style="height:1px;margin-top:20px"></div>
+
+      @if (loadingMore()) {
+      <div class="text-center py-4">
+        <div class="spinner-border spinner-border-sm" style="color:var(--primary-light)"></div>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">Loading more products...</p>
+      </div>
+      }
+
+      @if (!hasMore() && products().length > 0 && !loading()) {
+      <p class="text-center py-3" style="color:var(--text-muted);font-size:0.85rem">
+        Showing all {{ totalCount() }} products
+      </p>
+      }
       }
     </div>
   </div>

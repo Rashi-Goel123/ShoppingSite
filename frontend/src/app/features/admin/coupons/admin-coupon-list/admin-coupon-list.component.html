@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 style="font-size:1.6rem;margin:0">🎟️ Coupons Management</h2>
+  <button class="btn btn-primary-gradient" (click)="addCoupon()">➕ Add Coupon</button>
+</div>
+
+<div class="card-dark p-4">
+  @if (loading()) {
+    <div class="loading-spinner"><div class="spinner-border"></div></div>
+  } @else {
+    <div class="table-responsive">
+      <table class="table" style="color:var(--text-secondary)">
+        <thead>
+          <tr style="border-color:var(--border-color);font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">
+            <th>Code</th>
+            <th>Discount</th>
+            <th>Min Order</th>
+            <th>Usage</th>
+            <th>Expiry</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (coupon of coupons(); track coupon.id) {
+            <tr style="border-color:var(--border-color); vertical-align: middle;">
+              <td>
+                <span class="badge" style="background:rgba(99,102,241,0.2);color:var(--primary-light);font-family:monospace;font-size:0.9rem">
+                  {{ coupon.code }}
+                </span>
+              </td>
+              <td>
+                <span style="color:var(--text-primary);font-weight:600">
+                  @if (coupon.type === 'percentage') { {{ coupon.value }}% OFF } @else { ₹{{ coupon.value }} OFF }
+                </span>
+              </td>
+              <td>₹{{ coupon.minOrderAmount | number }}</td>
+              <td>
+                <div class="progress mt-1" style="height: 6px; background: rgba(255,255,255,0.1); width: 80px">
+                  <div class="progress-bar bg-success" [style.width.%]="(coupon.usedCount / coupon.usageLimit) * 100"></div>
+                </div>
+                <small style="color:var(--text-muted);font-size:0.75rem">{{ coupon.usedCount }} / {{ coupon.usageLimit }}</small>
+              </td>
+              <td>
+                {{ coupon.validUntil | date:'mediumDate' }}
+                @if (coupon.isActive) {
+                  <span class="status-badge delivered ms-2" style="font-size:0.65rem">Active</span>
+                } @else {
+                  <span class="status-badge cancelled ms-2" style="font-size:0.65rem">Expired</span>
+                }
+              </td>
+              <td class="text-end">
+                <button class="btn btn-sm btn-outline-glow" style="padding:4px 8px;font-size:0.8rem" (click)="deleteCoupon(coupon.id, coupon.code)">Delete</button>
+              </td>
+            </tr>
+          }
+          @if (coupons().length === 0) {
+            <tr>
+              <td colspan="6" class="text-center py-4 text-muted">No coupons found.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

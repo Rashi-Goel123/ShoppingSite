@@ -1,0 +1,169 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 style="font-size:1.6rem;margin:0">
+    @if (!createdProductId()) { ➕ Add New Product } @else { 🖼️ Upload Product Images }
+  </h2>
+  <a routerLink="/admin/products" class="btn btn-sm btn-outline-glow">← Back to List</a>
+</div>
+
+@if (!createdProductId()) {
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="product-form">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <!-- Basic Details -->
+      <div class="card-dark p-4 mb-4">
+        <h5 class="form-section-title">Basic Information</h5>
+        
+        <div class="mb-3">
+          <label class="form-label">Product Title *</label>
+          <input type="text" class="form-control admin-input" formControlName="title" placeholder="e.g. Vintage Leather Jacket">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description *</label>
+          <textarea class="form-control admin-input" formControlName="description" rows="4" placeholder="Detailed product description..."></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Category *</label>
+            <select class="form-select admin-input" formControlName="categoryId">
+              <option value="">Select Category</option>
+              @for (cat of categories(); track cat.id) {
+                <option [value]="cat.id">{{ cat.name }}</option>
+              }
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Base Price (₹) *</label>
+            <input type="number" class="form-control admin-input" formControlName="basePrice">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Brand</label>
+            <input type="text" class="form-control admin-input" formControlName="brand">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Gender</label>
+            <select class="form-select admin-input" formControlName="gender">
+              <option value="unisex">Unisex</option>
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Material</label>
+            <input type="text" class="form-control admin-input" formControlName="material">
+          </div>
+        </div>
+        
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="checkbox" formControlName="isFeatured" id="isFeatured">
+          <label class="form-check-label" for="isFeatured" style="color:var(--text-secondary)">
+            Featured Product (Shows on homepage)
+          </label>
+        </div>
+      </div>
+
+      <!-- Variants -->
+      <div class="card-dark p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="form-section-title mb-0">Product Variants *</h5>
+          <button type="button" class="btn btn-sm btn-outline-glow" (click)="addVariant()">+ Add Variant</button>
+        </div>
+        
+        <div formArrayName="variants">
+          @for (variant of variants.controls; track $index) {
+            <div [formGroupName]="$index" class="variant-box mb-3 p-3">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span style="font-weight:600;color:var(--primary-light)">Variant {{ $index + 1 }}</span>
+                @if (variants.length > 1) {
+                  <button type="button" class="btn btn-sm text-danger border-0 p-0" (click)="removeVariant($index)">✕ Remove</button>
+                }
+              </div>
+              
+              <div class="row g-2">
+                <div class="col-md-3">
+                  <label class="form-label" style="font-size:0.75rem">SKU *</label>
+                  <input type="text" class="form-control admin-input form-control-sm" formControlName="sku">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label" style="font-size:0.75rem">Color</label>
+                  <input type="text" class="form-control admin-input form-control-sm" formControlName="color" placeholder="e.g. Red">
+                </div>
+                <div class="col-md-2">
+                  <label class="form-label" style="font-size:0.75rem">Color Hex</label>
+                  <input type="color" class="form-control form-control-color w-100" formControlName="colorHex" style="height:31px;padding:2px">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label" style="font-size:0.75rem">Size</label>
+                  <input type="text" class="form-control admin-input form-control-sm" formControlName="size" placeholder="e.g. XL">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label" style="font-size:0.75rem">Price (₹) *</label>
+                  <input type="number" class="form-control admin-input form-control-sm" formControlName="price">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label" style="font-size:0.75rem">MRP (₹)</label>
+                  <input type="number" class="form-control admin-input form-control-sm" formControlName="mrp">
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label" style="font-size:0.75rem">Stock *</label>
+                  <input type="number" class="form-control admin-input form-control-sm" formControlName="stock">
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card-dark p-4 sticky-top" style="top: 100px;">
+        <h5 class="form-section-title">Publish</h5>
+        <p style="color:var(--text-muted);font-size:0.85rem">Fill all required fields to create the product. You will add images in the next step.</p>
+        
+        <button type="submit" class="btn btn-primary-gradient w-100 mt-3" [disabled]="submitting() || productForm.invalid">
+          @if (submitting()) {
+            <span class="spinner-border spinner-border-sm me-2"></span> Saving...
+          } @else {
+            Save & Continue to Images
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+} @else {
+  <!-- Step 2: Image Upload -->
+  <div class="card-dark p-4 text-center">
+    <div class="mb-4">
+      <h4 style="color:var(--success)">✅ Product created successfully!</h4>
+      <p style="color:var(--text-muted)">Now add some images for your product.</p>
+    </div>
+
+    <div class="upload-area mb-4">
+      <input type="file" id="fileInput" class="d-none" accept="image/*" (change)="onFileSelected($event)">
+      <label for="fileInput" class="btn btn-outline-glow">
+        @if (uploading()) {
+          <span class="spinner-border spinner-border-sm me-2"></span> Uploading...
+        } @else {
+          📷 Select Image to Upload
+        }
+      </label>
+    </div>
+
+    @if (uploadedImages().length > 0) {
+      <div class="d-flex flex-wrap gap-3 justify-content-center mb-4">
+        @for (img of uploadedImages(); track img.id) {
+          <div class="uploaded-img-wrapper">
+            <img [src]="img.url" class="uploaded-img">
+          </div>
+        }
+      </div>
+    }
+
+    <button class="btn btn-primary-gradient px-5" (click)="finish()">Finish</button>
+  </div>
+}

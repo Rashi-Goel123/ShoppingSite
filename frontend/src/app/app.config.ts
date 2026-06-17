@@ -10,7 +10,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([mockInterceptor, authInterceptor])),
+    provideHttpClient(withInterceptors([authInterceptor, mockInterceptor])),
     provideAnimationsAsync()
   ]
 };

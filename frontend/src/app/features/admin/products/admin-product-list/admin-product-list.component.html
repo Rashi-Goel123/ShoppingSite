@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 style="font-size:1.6rem;margin:0">👗 Products</h2>
+  <a routerLink="/admin/products/add" class="btn btn-primary-gradient">➕ Add New Product</a>
+</div>
+
+<div class="card-dark p-4">
+  @if (loading()) {
+    <div class="loading-spinner"><div class="spinner-border"></div></div>
+  } @else {
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <p style="color:var(--text-muted);font-size:0.9rem;margin:0">Total Products: {{ totalCount() }}</p>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table" style="color:var(--text-secondary)">
+        <thead>
+          <tr style="border-color:var(--border-color);font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px">
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Base Price</th>
+            <th>Status</th>
+            <th class="text-end">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products(); track product.id) {
+            <tr style="border-color:var(--border-color); vertical-align: middle;">
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  @if (product.images?.length > 0) {
+                    <img [src]="product.images[0].url" style="width:40px;height:40px;object-fit:cover;border-radius:6px">
+                  } @else {
+                    <div style="width:40px;height:40px;background:var(--border-color);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.8rem">No Img</div>
+                  }
+                  <div>
+                    <p style="color:var(--text-primary);margin:0;font-weight:500">{{ product.title }}</p>
+                    <span style="color:var(--text-muted);font-size:0.75rem">{{ product.variants?.length || 0 }} variant(s)</span>
+                  </div>
+                </div>
+              </td>
+              <td>{{ product.brand || '-' }}</td>
+              <td>{{ product.category?.name || '-' }}</td>
+              <td style="color:var(--text-primary);font-weight:600">₹{{ product.basePrice | number }}</td>
+              <td>
+                @if (product.isActive && !product.isDeleted) {
+                  <span class="status-badge delivered">Active</span>
+                } @else {
+                  <span class="status-badge cancelled">Inactive</span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="d-flex justify-content-end gap-2">
+                  <button class="btn btn-sm btn-outline-glow" style="padding:4px 8px;font-size:0.8rem" (click)="deleteProduct(product.id, product.title)">Delete</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <button class="btn btn-sm btn-outline-glow" [disabled]="page() === 1" (click)="prevPage()">Previous</button>
+      <span style="color:var(--text-muted);font-size:0.85rem">Page {{ page() }}</span>
+      <button class="btn btn-sm btn-outline-glow" [disabled]="products().length < 20" (click)="nextPage()">Next</button>
+    </div>
+  }
+</div>

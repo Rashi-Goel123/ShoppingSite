@@ -1,6 +1,6 @@
 import { ProductListItem, ProductDetail } from '../core/models/models';
 
-export const MOCK_PRODUCTS: ProductListItem[] = [
+const BASE_PRODUCTS: ProductListItem[] = [
   {
     id: 1,
     title: "Heshe Women's Leather Bag",
@@ -8,7 +8,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Heshe",
     gender: "women",
     basePrice: 10399,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=400",
     ratingAverage: 3.7,
     ratingCount: 281,
     isFeatured: false,
@@ -24,7 +24,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 1599,
-    firstImage: "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     ratingAverage: 3.8,
     ratingCount: 190,
     isFeatured: false,
@@ -40,7 +40,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 2399,
-    firstImage: "https://cdn.dummyjson.com/product-images/tops/blue-frock/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     ratingAverage: 4.8,
     ratingCount: 56,
     isFeatured: false,
@@ -56,7 +56,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashionista",
     gender: "women",
     basePrice: 3999,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=400",
     ratingAverage: 4.2,
     ratingCount: 39,
     isFeatured: false,
@@ -72,7 +72,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 1999,
-    firstImage: "https://cdn.dummyjson.com/product-images/tops/short-frock/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     ratingAverage: 3.9,
     ratingCount: 35,
     isFeatured: false,
@@ -88,7 +88,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Diva",
     gender: "women",
     basePrice: 3999,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400",
     ratingAverage: 3.9,
     ratingCount: 192,
     isFeatured: true,
@@ -104,7 +104,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Gold",
     gender: "women",
     basePrice: 63999,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-watches/watch-gold-for-women/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4.3,
     ratingCount: 53,
     isFeatured: false,
@@ -120,7 +120,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 1999,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-jewellery/green-oval-earring/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400",
     ratingAverage: 3.6,
     ratingCount: 232,
     isFeatured: true,
@@ -136,7 +136,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Urban Chic",
     gender: "women",
     basePrice: 3199,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=400",
     ratingAverage: 4.8,
     ratingCount: 184,
     isFeatured: false,
@@ -152,7 +152,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Co.",
     gender: "women",
     basePrice: 10399,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4.6,
     ratingCount: 207,
     isFeatured: false,
@@ -168,7 +168,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Calvin Klein",
     gender: "women",
     basePrice: 6399,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400",
     ratingAverage: 4.5,
     ratingCount: 83,
     isFeatured: true,
@@ -184,7 +184,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 7199,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
     ratingAverage: 4.2,
     ratingCount: 269,
     isFeatured: false,
@@ -200,7 +200,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Comfort Trends",
     gender: "women",
     basePrice: 1599,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400",
     ratingAverage: 3.7,
     ratingCount: 177,
     isFeatured: false,
@@ -216,7 +216,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Elegance Collection",
     gender: "women",
     basePrice: 4799,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=400",
     ratingAverage: 4,
     ratingCount: 155,
     isFeatured: false,
@@ -232,7 +232,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 2799,
-    firstImage: "https://cdn.dummyjson.com/product-images/tops/gray-dress/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     ratingAverage: 4.5,
     ratingCount: 275,
     isFeatured: false,
@@ -248,7 +248,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Pampi",
     gender: "women",
     basePrice: 2399,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400",
     ratingAverage: 3.8,
     ratingCount: 183,
     isFeatured: false,
@@ -264,7 +264,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 3199,
-    firstImage: "https://cdn.dummyjson.com/product-images/tops/tartan-dress/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400",
     ratingAverage: 5,
     ratingCount: 302,
     isFeatured: false,
@@ -280,7 +280,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "IWC",
     gender: "women",
     basePrice: 399999,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-watches/iwc-ingenieur-automatic-steel/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4.4,
     ratingCount: 40,
     isFeatured: true,
@@ -296,7 +296,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Prada",
     gender: "women",
     basePrice: 47999,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=400",
     ratingAverage: 4.4,
     ratingCount: 67,
     isFeatured: false,
@@ -312,7 +312,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Style Hub",
     gender: "women",
     basePrice: 10399,
-    firstImage: "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400",
     ratingAverage: 3.5,
     ratingCount: 137,
     isFeatured: false,
@@ -328,7 +328,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Trends",
     gender: "men",
     basePrice: 2399,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 4.9,
     ratingCount: 80,
     isFeatured: false,
@@ -344,7 +344,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Classic Wear",
     gender: "men",
     basePrice: 2799,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 4.3,
     ratingCount: 66,
     isFeatured: false,
@@ -360,7 +360,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Rolex",
     gender: "men",
     basePrice: 1039999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4,
     ratingCount: 274,
     isFeatured: false,
@@ -376,7 +376,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Off White",
     gender: "men",
     basePrice: 8799,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     ratingAverage: 3.8,
     ratingCount: 73,
     isFeatured: false,
@@ -392,7 +392,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Puma",
     gender: "men",
     basePrice: 7199,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     ratingAverage: 4.8,
     ratingCount: 294,
     isFeatured: false,
@@ -408,7 +408,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Rolex",
     gender: "men",
     basePrice: 1119999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-watches/rolex-submariner-watch/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4.9,
     ratingCount: 285,
     isFeatured: false,
@@ -424,7 +424,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Nike",
     gender: "men",
     basePrice: 11999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     ratingAverage: 4,
     ratingCount: 195,
     isFeatured: true,
@@ -440,7 +440,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Gigabyte",
     gender: "men",
     basePrice: 1999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 4.8,
     ratingCount: 292,
     isFeatured: false,
@@ -456,7 +456,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Timepieces",
     gender: "men",
     basePrice: 7199,
-    firstImage: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4.3,
     ratingCount: 275,
     isFeatured: false,
@@ -472,7 +472,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Casual Comfort",
     gender: "men",
     basePrice: 1599,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 5,
     ratingCount: 152,
     isFeatured: false,
@@ -488,7 +488,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Urban Chic",
     gender: "men",
     basePrice: 2239,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 3.5,
     ratingCount: 228,
     isFeatured: true,
@@ -504,7 +504,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Rolex",
     gender: "men",
     basePrice: 879999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-watches/rolex-datejust/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4.5,
     ratingCount: 25,
     isFeatured: false,
@@ -520,7 +520,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Off White",
     gender: "men",
     basePrice: 9599,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     ratingAverage: 3.7,
     ratingCount: 201,
     isFeatured: false,
@@ -536,7 +536,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Longines",
     gender: "men",
     basePrice: 119999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-watches/longines-master-collection/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 3.9,
     ratingCount: 61,
     isFeatured: false,
@@ -552,7 +552,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Rolex",
     gender: "men",
     basePrice: 719999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-date-black-dial/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 3.9,
     ratingCount: 299,
     isFeatured: false,
@@ -568,7 +568,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Nike",
     gender: "men",
     basePrice: 6399,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     ratingAverage: 4.9,
     ratingCount: 85,
     isFeatured: false,
@@ -584,7 +584,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Trends",
     gender: "men",
     basePrice: 2399,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 4.8,
     ratingCount: 154,
     isFeatured: false,
@@ -600,7 +600,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Classic Wear",
     gender: "men",
     basePrice: 2799,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400",
     ratingAverage: 3.8,
     ratingCount: 208,
     isFeatured: true,
@@ -616,7 +616,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Rolex",
     gender: "men",
     basePrice: 1039999,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400",
     ratingAverage: 4,
     ratingCount: 218,
     isFeatured: false,
@@ -632,7 +632,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Off White",
     gender: "men",
     basePrice: 8799,
-    firstImage: "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
     ratingAverage: 3.6,
     ratingCount: 37,
     isFeatured: false,
@@ -648,7 +648,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 1839,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.5,
     ratingCount: 116,
     isFeatured: true,
@@ -664,7 +664,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Fun",
     gender: "unisex",
     basePrice: 1599,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4,
     ratingCount: 163,
     isFeatured: false,
@@ -680,7 +680,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 2799,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.2,
     ratingCount: 122,
     isFeatured: false,
@@ -696,7 +696,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 1999,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.2,
     ratingCount: 23,
     isFeatured: false,
@@ -712,7 +712,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 2399,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 3.6,
     ratingCount: 67,
     isFeatured: false,
@@ -728,7 +728,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 1839,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.7,
     ratingCount: 250,
     isFeatured: false,
@@ -744,7 +744,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Fun",
     gender: "unisex",
     basePrice: 1599,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.9,
     ratingCount: 207,
     isFeatured: true,
@@ -760,7 +760,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 2799,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.2,
     ratingCount: 21,
     isFeatured: false,
@@ -776,7 +776,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 1999,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 4.6,
     ratingCount: 158,
     isFeatured: false,
@@ -792,7 +792,7 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
     brand: "Fashion Shades",
     gender: "unisex",
     basePrice: 2399,
-    firstImage: "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp",
+    firstImage: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400",
     ratingAverage: 3.5,
     ratingCount: 59,
     isFeatured: false,
@@ -803,6 +803,19 @@ export const MOCK_PRODUCTS: ProductListItem[] = [
   }
 ];
 
+
+export const MOCK_PRODUCTS: ProductListItem[] = [];
+for (let i = 0; i < 4; i++) {
+  BASE_PRODUCTS.forEach(p => {
+    MOCK_PRODUCTS.push({
+      ...p,
+      id: p.id + i * 1000,
+      title: p.title + (i > 0 ? ' - Edition ' + i : ''),
+      slug: p.slug + (i > 0 ? '-ed-' + i : '')
+    });
+  });
+}
+
 export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
   {
     "id": 1,
@@ -811,7 +824,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Heshe",
     "gender": "women",
     "basePrice": 10399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.7,
     "ratingCount": 281,
     "isFeatured": false,
@@ -821,9 +834,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 27,
     "description": "The Heshe Women's Leather Bag is a luxurious and high-quality leather bag for the sophisticated woman. With a timeless design and durable craftsmanship, it's a versatile accessory.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/heshe-women's-leather-bag/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -833,7 +846,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 1599,
-    "firstImage": "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.8,
     "ratingCount": 190,
     "isFeatured": false,
@@ -843,10 +856,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 30,
     "description": "The Girl Summer Dress is a cute and breezy dress designed for warm weather. With playful patterns and lightweight fabric, it's perfect for keeping cool and stylish during the summer.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/1.webp",
-      "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/2.webp",
-      "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/3.webp",
-      "https://cdn.dummyjson.com/product-images/tops/girl-summer-dress/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -856,7 +869,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 2399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/tops/blue-frock/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.8,
     "ratingCount": 56,
     "isFeatured": false,
@@ -866,10 +879,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 49,
     "description": "The Blue Frock is a charming and stylish dress for various occasions. With a vibrant blue color and a comfortable design, it adds a touch of elegance to your wardrobe.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/tops/blue-frock/1.webp",
-      "https://cdn.dummyjson.com/product-images/tops/blue-frock/2.webp",
-      "https://cdn.dummyjson.com/product-images/tops/blue-frock/3.webp",
-      "https://cdn.dummyjson.com/product-images/tops/blue-frock/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -879,7 +892,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashionista",
     "gender": "women",
     "basePrice": 3999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.2,
     "ratingCount": 39,
     "isFeatured": false,
@@ -889,9 +902,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 19,
     "description": "The Blue Women's Handbag is a stylish and spacious accessory for everyday use. With a vibrant blue color and multiple compartments, it combines fashion and functionality.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/blue-women's-handbag/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -901,7 +914,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 1999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/tops/short-frock/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.9,
     "ratingCount": 35,
     "isFeatured": false,
@@ -911,10 +924,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 27,
     "description": "The Short Frock is a playful and trendy dress with a shorter length. Ideal for casual outings or special occasions, it combines style and comfort for a fashionable look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/tops/short-frock/1.webp",
-      "https://cdn.dummyjson.com/product-images/tops/short-frock/2.webp",
-      "https://cdn.dummyjson.com/product-images/tops/short-frock/3.webp",
-      "https://cdn.dummyjson.com/product-images/tops/short-frock/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -924,7 +937,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Diva",
     "gender": "women",
     "basePrice": 3999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.9,
     "ratingCount": 192,
     "isFeatured": true,
@@ -934,10 +947,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 15,
     "description": "The Golden Shoes for Women are a glamorous choice for special occasions. Featuring a golden hue and stylish design, they add a touch of luxury to your outfit.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/3.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/golden-shoes-woman/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -947,7 +960,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Gold",
     "gender": "women",
     "basePrice": 63999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-watches/watch-gold-for-women/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.3,
     "ratingCount": 53,
     "isFeatured": false,
@@ -957,9 +970,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 14,
     "description": "The Gold Women's Watch is a stunning accessory that combines luxury and style. Featuring a gold-plated case and a chic design, it adds a touch of glamour to any outfit.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-watches/watch-gold-for-women/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-watches/watch-gold-for-women/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-watches/watch-gold-for-women/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -969,7 +982,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 1999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-jewellery/green-oval-earring/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.6,
     "ratingCount": 232,
     "isFeatured": true,
@@ -979,9 +992,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 27,
     "description": "The Green Oval Earring is a stylish and versatile accessory with a unique oval shape. Whether for casual or dressy occasions, its green hue and contemporary design make it a standout piece.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-jewellery/green-oval-earring/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-jewellery/green-oval-earring/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-jewellery/green-oval-earring/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -991,7 +1004,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Urban Chic",
     "gender": "women",
     "basePrice": 3199,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.8,
     "ratingCount": 184,
     "isFeatured": false,
@@ -1001,9 +1014,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 35,
     "description": "The White Faux Leather Backpack is a trendy and practical backpack for the modern woman. With a sleek white design and ample storage space, it's perfect for both casual and on-the-go styles.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/white-faux-leather-backpack/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1013,7 +1026,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Co.",
     "gender": "women",
     "basePrice": 10399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.6,
     "ratingCount": 207,
     "isFeatured": false,
@@ -1023,9 +1036,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 32,
     "description": "The Women's Wrist Watch is a versatile and fashionable timepiece for everyday wear. With a comfortable strap and a simple yet elegant design, it complements various styles.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1035,7 +1048,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Calvin Klein",
     "gender": "women",
     "basePrice": 6399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.5,
     "ratingCount": 83,
     "isFeatured": true,
@@ -1045,10 +1058,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 38,
     "description": "Calvin Klein Heel Shoes are elegant and sophisticated, designed for formal occasions. With a classic design and high-quality materials, they complement your stylish ensemble.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/3.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/calvin-klein-heel-shoes/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1058,7 +1071,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 7199,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.2,
     "ratingCount": 269,
     "isFeatured": false,
@@ -1068,10 +1081,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 38,
     "description": "The Corset Leather With Skirt is a bold and edgy ensemble that combines a stylish corset with a matching skirt. Ideal for fashion-forward individuals, it makes a statement at any event.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/womens-dresses/corset-leather-with-skirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1081,7 +1094,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Comfort Trends",
     "gender": "women",
     "basePrice": 1599,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.7,
     "ratingCount": 177,
     "isFeatured": false,
@@ -1091,10 +1104,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 44,
     "description": "The Black & Brown Slipper is a comfortable and stylish choice for casual wear. Featuring a blend of black and brown colors, it adds a touch of sophistication to your relaxation.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/3.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/black-&-brown-slipper/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1104,7 +1117,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Elegance Collection",
     "gender": "women",
     "basePrice": 4799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4,
     "ratingCount": 155,
     "isFeatured": false,
@@ -1114,9 +1127,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 23,
     "description": "The Women Handbag in Black is a classic and versatile accessory that complements various outfits. With a timeless black color and functional design, it's a must-have in every woman's wardrobe.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/women-handbag-black/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1126,7 +1139,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 2799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/tops/gray-dress/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.5,
     "ratingCount": 275,
     "isFeatured": false,
@@ -1136,10 +1149,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 33,
     "description": "The Gray Dress is a versatile and chic option for various occasions. With a neutral gray color, it can be dressed up or down, making it a wardrobe staple for any fashion-forward individual.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/tops/gray-dress/1.webp",
-      "https://cdn.dummyjson.com/product-images/tops/gray-dress/2.webp",
-      "https://cdn.dummyjson.com/product-images/tops/gray-dress/3.webp",
-      "https://cdn.dummyjson.com/product-images/tops/gray-dress/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1149,7 +1162,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Pampi",
     "gender": "women",
     "basePrice": 2399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.8,
     "ratingCount": 183,
     "isFeatured": false,
@@ -1159,10 +1172,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 36,
     "description": "Pampi Shoes offer a blend of comfort and style for everyday use. With a versatile design, they are suitable for various casual occasions, providing a trendy and relaxed look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/3.webp",
-      "https://cdn.dummyjson.com/product-images/womens-shoes/pampi-shoes/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1172,7 +1185,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 3199,
-    "firstImage": "https://cdn.dummyjson.com/product-images/tops/tartan-dress/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 5,
     "ratingCount": 302,
     "isFeatured": false,
@@ -1182,10 +1195,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 38,
     "description": "The Tartan Dress features a classic tartan pattern, bringing a timeless and sophisticated touch to your wardrobe. Perfect for fall and winter, it adds a hint of traditional charm.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/tops/tartan-dress/1.webp",
-      "https://cdn.dummyjson.com/product-images/tops/tartan-dress/2.webp",
-      "https://cdn.dummyjson.com/product-images/tops/tartan-dress/3.webp",
-      "https://cdn.dummyjson.com/product-images/tops/tartan-dress/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1195,7 +1208,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "IWC",
     "gender": "women",
     "basePrice": 399999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-watches/iwc-ingenieur-automatic-steel/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.4,
     "ratingCount": 40,
     "isFeatured": true,
@@ -1205,9 +1218,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 18,
     "description": "The IWC Ingenieur Automatic Steel watch is a durable and sophisticated timepiece. With a stainless steel case and automatic movement, it combines precision and style for watch enthusiasts.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-watches/iwc-ingenieur-automatic-steel/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-watches/iwc-ingenieur-automatic-steel/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-watches/iwc-ingenieur-automatic-steel/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1217,7 +1230,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Prada",
     "gender": "women",
     "basePrice": 47999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.4,
     "ratingCount": 67,
     "isFeatured": false,
@@ -1227,9 +1240,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 10,
     "description": "The Prada Women Bag is an iconic designer bag that exudes elegance and luxury. Crafted with precision and featuring the Prada logo, it's a statement piece for fashion enthusiasts.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-bags/prada-women-bag/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1239,7 +1252,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Style Hub",
     "gender": "women",
     "basePrice": 10399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.5,
     "ratingCount": 137,
     "isFeatured": false,
@@ -1249,10 +1262,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 23,
     "description": "The Black Women's Gown is an elegant and timeless evening gown. With a sleek black design, it's perfect for formal events and special occasions, exuding sophistication and style.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/1.webp",
-      "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/2.webp",
-      "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/3.webp",
-      "https://cdn.dummyjson.com/product-images/womens-dresses/black-women's-gown/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1262,7 +1275,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Trends",
     "gender": "men",
     "basePrice": 2399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.9,
     "ratingCount": 80,
     "isFeatured": false,
@@ -1272,10 +1285,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 24,
     "description": "The Blue & Black Check Shirt is a stylish and comfortable men's shirt featuring a classic check pattern. Made from high-quality fabric, it's suitable for both casual and semi-formal occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1285,7 +1298,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Classic Wear",
     "gender": "men",
     "basePrice": 2799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.3,
     "ratingCount": 66,
     "isFeatured": false,
@@ -1295,10 +1308,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 31,
     "description": "The Man Plaid Shirt is a timeless and versatile men's shirt with a classic plaid pattern. Its comfortable fit and casual style make it a wardrobe essential for various occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1308,7 +1321,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Rolex",
     "gender": "men",
     "basePrice": 1039999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4,
     "ratingCount": 274,
     "isFeatured": false,
@@ -1318,9 +1331,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 13,
     "description": "The Rolex Cellini Moonphase is a masterpiece of horology, featuring a moon phase complication and exquisite design. It reflects Rolex's commitment to precision and elegance.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1330,7 +1343,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Off White",
     "gender": "men",
     "basePrice": 8799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.8,
     "ratingCount": 73,
     "isFeatured": false,
@@ -1340,10 +1353,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 26,
     "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1353,7 +1366,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Puma",
     "gender": "men",
     "basePrice": 7199,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.8,
     "ratingCount": 294,
     "isFeatured": false,
@@ -1363,10 +1376,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 37,
     "description": "The Puma Future Rider Trainers offer a blend of retro style and modern comfort. Perfect for casual wear, these trainers provide a fashionable and comfortable option for everyday use.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/puma-future-rider-trainers/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1376,7 +1389,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Rolex",
     "gender": "men",
     "basePrice": 1119999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-submariner-watch/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.9,
     "ratingCount": 285,
     "isFeatured": false,
@@ -1386,9 +1399,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 45,
     "description": "The Rolex Submariner is a legendary dive watch with a rich history. Known for its durability and water resistance, it's a symbol of adventure and exploration.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-submariner-watch/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-submariner-watch/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-submariner-watch/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1398,7 +1411,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Nike",
     "gender": "men",
     "basePrice": 11999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4,
     "ratingCount": 195,
     "isFeatured": true,
@@ -1408,10 +1421,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 35,
     "description": "The Nike Air Jordan 1 in Red and Black is an iconic basketball sneaker known for its stylish design and high-performance features, making it a favorite among sneaker enthusiasts and athletes.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-air-jordan-1-red-and-black/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1421,7 +1434,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Gigabyte",
     "gender": "men",
     "basePrice": 1999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.8,
     "ratingCount": 292,
     "isFeatured": false,
@@ -1431,10 +1444,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 12,
     "description": "The Gigabyte Aorus Men Tshirt is a cool and casual shirt for gaming enthusiasts. With the Aorus logo and sleek design, it's perfect for expressing your gaming style.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/gigabyte-aorus-men-tshirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1444,7 +1457,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Timepieces",
     "gender": "men",
     "basePrice": 7199,
-    "firstImage": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.3,
     "ratingCount": 275,
     "isFeatured": false,
@@ -1454,9 +1467,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 32,
     "description": "The Brown Leather Belt Watch is a stylish timepiece with a classic design. Featuring a genuine leather strap and a sleek dial, it adds a touch of sophistication to your look.",
     "images": [
-      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=400",
-      "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400",
-      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=400"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1466,7 +1479,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Casual Comfort",
     "gender": "men",
     "basePrice": 1599,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 5,
     "ratingCount": 152,
     "isFeatured": false,
@@ -1476,10 +1489,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 12,
     "description": "The Man Short Sleeve Shirt is a breezy and stylish option for warm days. With a comfortable fit and short sleeves, it's perfect for a laid-back yet polished look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-short-sleeve-shirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1489,7 +1502,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Urban Chic",
     "gender": "men",
     "basePrice": 2239,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.5,
     "ratingCount": 228,
     "isFeatured": true,
@@ -1499,10 +1512,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 47,
     "description": "The Men Check Shirt is a classic and versatile shirt featuring a stylish check pattern. Suitable for various occasions, it adds a smart and polished touch to your wardrobe.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/men-check-shirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1512,7 +1525,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Rolex",
     "gender": "men",
     "basePrice": 879999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-datejust/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.5,
     "ratingCount": 25,
     "isFeatured": false,
@@ -1522,9 +1535,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 33,
     "description": "The Rolex Datejust is an iconic and versatile timepiece with a date window. Known for its timeless design and reliability, it's a symbol of Rolex's watchmaking excellence.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-datejust/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-datejust/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-datejust/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1534,7 +1547,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Off White",
     "gender": "men",
     "basePrice": 9599,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.7,
     "ratingCount": 201,
     "isFeatured": false,
@@ -1544,10 +1557,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 18,
     "description": "The Sports Sneakers in Off White and Red combine style and functionality, making them a fashionable choice for sports enthusiasts. The red and off-white color combination adds a bold and energetic touch.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-&-red/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1557,7 +1570,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Longines",
     "gender": "men",
     "basePrice": 119999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-watches/longines-master-collection/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.9,
     "ratingCount": 61,
     "isFeatured": false,
@@ -1567,9 +1580,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 37,
     "description": "The Longines Master Collection is an elegant and refined watch known for its precision and craftsmanship. With a timeless design, it's a symbol of luxury and sophistication.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-watches/longines-master-collection/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/longines-master-collection/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/longines-master-collection/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1579,7 +1592,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Rolex",
     "gender": "men",
     "basePrice": 719999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-date-black-dial/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.9,
     "ratingCount": 299,
     "isFeatured": false,
@@ -1589,9 +1602,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 35,
     "description": "The Rolex Cellini Date with Black Dial is a classic and prestigious watch. With a black dial and date complication, it exudes sophistication and is a symbol of Rolex's heritage.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-date-black-dial/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-date-black-dial/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-date-black-dial/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1601,7 +1614,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Nike",
     "gender": "men",
     "basePrice": 6399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.9,
     "ratingCount": 85,
     "isFeatured": false,
@@ -1611,10 +1624,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 43,
     "description": "Nike Baseball Cleats are designed for maximum traction and performance on the baseball field. They provide stability and support for players during games and practices.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/nike-baseball-cleats/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1624,7 +1637,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Trends",
     "gender": "men",
     "basePrice": 2399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.8,
     "ratingCount": 154,
     "isFeatured": false,
@@ -1634,10 +1647,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 14,
     "description": "The Blue & Black Check Shirt is a stylish and comfortable men's shirt featuring a classic check pattern. Made from high-quality fabric, it's suitable for both casual and semi-formal occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/blue-&-black-check-shirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1647,7 +1660,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Classic Wear",
     "gender": "men",
     "basePrice": 2799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.8,
     "ratingCount": 208,
     "isFeatured": true,
@@ -1657,10 +1670,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 46,
     "description": "The Man Plaid Shirt is a timeless and versatile men's shirt with a classic plaid pattern. Its comfortable fit and casual style make it a wardrobe essential for various occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shirts/man-plaid-shirt/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1670,7 +1683,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Rolex",
     "gender": "men",
     "basePrice": 1039999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4,
     "ratingCount": 218,
     "isFeatured": false,
@@ -1680,9 +1693,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 21,
     "description": "The Rolex Cellini Moonphase is a masterpiece of horology, featuring a moon phase complication and exquisite design. It reflects Rolex's commitment to precision and elegance.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-watches/rolex-cellini-moonphase/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1692,7 +1705,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Off White",
     "gender": "men",
     "basePrice": 8799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.6,
     "ratingCount": 37,
     "isFeatured": false,
@@ -1702,10 +1715,10 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 48,
     "description": "Another variant of the Sports Sneakers in Off White Red, featuring a unique design. These sneakers offer style and comfort for casual occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/1.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/2.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/3.webp",
-      "https://cdn.dummyjson.com/product-images/mens-shoes/sports-sneakers-off-white-red/4.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1715,7 +1728,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 1839,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.5,
     "ratingCount": 116,
     "isFeatured": true,
@@ -1725,9 +1738,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 27,
     "description": "The Sunglasses offer a classic and simple design with a focus on functionality. These sunglasses provide essential UV protection while maintaining a timeless look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1737,7 +1750,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Fun",
     "gender": "unisex",
     "basePrice": 1599,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4,
     "ratingCount": 163,
     "isFeatured": false,
@@ -1747,9 +1760,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 28,
     "description": "The Party Glasses are designed to add flair to your party outfit. With unique shapes or colorful frames, they're perfect for adding a playful touch to your look during celebrations.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1759,7 +1772,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 2799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.2,
     "ratingCount": 122,
     "isFeatured": false,
@@ -1769,9 +1782,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 35,
     "description": "The Green and Black Glasses feature a bold combination of green and black colors, adding a touch of vibrancy to your eyewear collection. They are both stylish and eye-catching.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1781,7 +1794,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 1999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.2,
     "ratingCount": 23,
     "isFeatured": false,
@@ -1791,9 +1804,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 39,
     "description": "The Classic Sun Glasses offer a timeless design with a neutral frame and UV-protected lenses. These sunglasses are versatile and suitable for various occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1803,7 +1816,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 2399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.6,
     "ratingCount": 67,
     "isFeatured": false,
@@ -1813,9 +1826,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 20,
     "description": "The Black Sun Glasses are a classic and stylish choice, featuring a sleek black frame and tinted lenses. They provide both UV protection and a fashionable look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1825,7 +1838,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 1839,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.7,
     "ratingCount": 250,
     "isFeatured": false,
@@ -1835,9 +1848,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 16,
     "description": "The Sunglasses offer a classic and simple design with a focus on functionality. These sunglasses provide essential UV protection while maintaining a timeless look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/sunglasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1847,7 +1860,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Fun",
     "gender": "unisex",
     "basePrice": 1599,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.9,
     "ratingCount": 207,
     "isFeatured": true,
@@ -1857,9 +1870,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 39,
     "description": "The Party Glasses are designed to add flair to your party outfit. With unique shapes or colorful frames, they're perfect for adding a playful touch to your look during celebrations.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/party-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1869,7 +1882,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 2799,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.2,
     "ratingCount": 21,
     "isFeatured": false,
@@ -1879,9 +1892,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 40,
     "description": "The Green and Black Glasses feature a bold combination of green and black colors, adding a touch of vibrancy to your eyewear collection. They are both stylish and eye-catching.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/green-and-black-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1891,7 +1904,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 1999,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 4.6,
     "ratingCount": 158,
     "isFeatured": false,
@@ -1901,9 +1914,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 13,
     "description": "The Classic Sun Glasses offer a timeless design with a neutral frame and UV-protected lenses. These sunglasses are versatile and suitable for various occasions.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/classic-sun-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   },
   {
@@ -1913,7 +1926,7 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "brand": "Fashion Shades",
     "gender": "unisex",
     "basePrice": 2399,
-    "firstImage": "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/thumbnail.webp",
+    "firstImage": "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
     "ratingAverage": 3.5,
     "ratingCount": 59,
     "isFeatured": false,
@@ -1923,9 +1936,9 @@ export const MOCK_PRODUCTS_DETAIL: ProductDetail[] = [
     "discountPercent": 41,
     "description": "The Black Sun Glasses are a classic and stylish choice, featuring a sleek black frame and tinted lenses. They provide both UV protection and a fashionable look.",
     "images": [
-      "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/1.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/2.webp",
-      "https://cdn.dummyjson.com/product-images/sunglasses/black-sun-glasses/3.webp"
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400",
+      "https://images.unsplash.com/photo-1445205170230-053b83016050?w=400"
     ]
   }
 ].map((p: any) => ({

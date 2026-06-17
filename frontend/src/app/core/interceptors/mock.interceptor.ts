@@ -21,8 +21,13 @@ export const mockInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   // Normal mode: try real API first, fallback to mock on error
+  // IMPORTANT: Do NOT catch 401/403 — those must propagate for proper auth handling
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
+      if (error.status === 401 || error.status === 403) {
+        // Auth errors must propagate — don't mask with mock data
+        throw error;
+      }
       console.warn(`[API Fallback] ${req.method} ${req.url} failed with ${error.status || 'network error'}, trying mock data...`);
       const mockResponse = getMockResponse(req);
       if (mockResponse) return mockResponse;
@@ -83,7 +88,25 @@ function getMockResponse(req: any) {
 
   if (url.match(/^\/products\/[a-z0-9-]+$/) && method === 'GET') {
     const slug = url.split('/').pop()!;
-    const product = MOCK_PRODUCTS_DETAIL.find(p => p.slug === slug);
+    let product = MOCK_PRODUCTS_DETAIL.find(p => p.slug === slug);
+
+    if (!product && slug.includes('-ed-')) {
+      const baseSlug = slug.split('-ed-')[0];
+      const baseProduct = MOCK_PRODUCTS_DETAIL.find(p => p.slug === baseSlug);
+      if (baseProduct) {
+        product = JSON.parse(JSON.stringify(baseProduct));
+        const listProduct = MOCK_PRODUCTS.find(p => p.slug === slug);
+        if (listProduct && product) {
+          product.id = listProduct.id;
+          product.title = listProduct.title;
+          product.slug = listProduct.slug;
+          if (listProduct.firstImage && product.images && product.images.length > 0) {
+            product.images[0].url = listProduct.firstImage;
+          }
+        }
+      }
+    }
+
     return product ? respond(product) : respond({ message: 'Not found' }, 404);
   }
 
@@ -101,14 +124,17 @@ function getMockResponse(req: any) {
     if (category) {
       const targetSlug = category.toLowerCase();
       const parentCat = MOCK_CATEGORIES.find(c => c.slug === targetSlug);
+      
+      const getProductSlug = (catName: string) => catName.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-');
+      
       if (parentCat && parentCat.children) {
         const childSlugs = parentCat.children.map(c => c.slug);
         filtered = filtered.filter(p => {
-          const productCatSlug = p.categoryName.toLowerCase().replace(/ /g, '-');
+          const productCatSlug = getProductSlug(p.categoryName);
           return productCatSlug === targetSlug || childSlugs.includes(productCatSlug);
         });
       } else {
-        filtered = filtered.filter(p => p.categoryName.toLowerCase().replace(/ /g, '-') === targetSlug);
+        filtered = filtered.filter(p => getProductSlug(p.categoryName) === targetSlug);
       }
     }
 
@@ -139,7 +165,13 @@ function getMockResponse(req: any) {
       filtered.sort((a, b) => b.id - a.id);
     }
 
-    return respond({ items: filtered, totalCount: filtered.length, page: 1, pageSize: 12, totalPages: 1 });
+    const page = Number(urlObj.searchParams.get('page')) || 1;
+    const pageSize = Number(urlObj.searchParams.get('pageSize')) || 12;
+    const totalCount = filtered.length;
+    const totalPages = Math.ceil(totalCount / pageSize);
+    const paginatedItems = filtered.slice((page - 1) * pageSize, page * pageSize);
+
+    return respond({ items: paginatedItems, totalCount, page, pageSize, totalPages });
   }
 
   // === CART ===
@@ -178,8 +210,12 @@ function getMockResponse(req: any) {
   if (url.startsWith('/users/addresses/') && method === 'DELETE')
     return respond({ message: 'Deleted' });
 
-  if (url.startsWith('/users/wishlist') && method === 'GET')
+  if (url === '/users/wishlist' && method === 'GET')
     return respond([]);
+  if (url === '/users/wishlist/ids' && method === 'GET')
+    return respond([]);
+  if (url.match(/^\/users\/wishlist\/\d+$/) && method === 'POST')
+    return respond({ added: true, message: 'Added to wishlist' });
 
   if (url === '/users/notifications' && method === 'GET')
     return respond([]);
@@ -205,6 +241,7 @@ function getMockResponse(req: any) {
     const newOrder = {
       id: newId,
       orderNumber: 'FS-' + Date.now().toString().slice(-8),
+      userName: 'Mock User',
       status: 'placed',
       paymentStatus: body?.paymentMethod === 'cod' ? 'pending' : 'paid',
       totalAmount: body?.totalAmount || 0,
@@ -258,6 +295,61 @@ function getMockResponse(req: any) {
       recentOrders: MOCK_ORDERS.slice(0, 5),
       topProducts: MOCK_PRODUCTS.slice(0, 5).map((p, i) => ({ productId: p.id, title: p.title, image: p.firstImage, totalSold: 50 - i * 8, totalRevenue: (50 - i * 8) * p.basePrice }))
     });
+
+  // === ADMIN PRODUCTS ===
+  if (url.startsWith('/admin/products') && !url.includes('/images') && method === 'GET') {
+    return respond({
+      items: MOCK_PRODUCTS,
+      totalCount: MOCK_PRODUCTS.length,
+      page: 1,
+      pageSize: 20,
+      totalPages: 1
+    });
+  }
+
+  if (url === '/admin/products' && method === 'POST') {
+    const body = req.body as any;
+    const newId = MOCK_PRODUCTS.length > 0 ? Math.max(...MOCK_PRODUCTS.map(p => p.id)) + 1 : 1;
+    const newProduct = {
+      id: newId,
+      title: body.title,
+      slug: body.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      brand: body.brand || 'Generic',
+      gender: body.gender || 'unisex',
+      basePrice: body.basePrice,
+      isFeatured: body.isFeatured || false,
+      categoryName: 'Category ' + body.categoryId,
+      firstImage: 'https://images.unsplash.com/photo-1555529733-0e67056058e1?w=600', // default image
+      ratingAverage: 0,
+      ratingCount: 0
+    };
+    MOCK_PRODUCTS.unshift(newProduct);
+    return respond({ id: newProduct.id, message: 'Product created successfully' });
+  }
+
+  if (url.match(/^\/admin\/products\/\d+\/images$/) && method === 'POST') {
+    return respond({
+      id: Date.now(),
+      url: 'https://images.unsplash.com/photo-1555529733-0e67056058e1?w=600',
+      displayOrder: 0
+    });
+  }
+
+  // === ADMIN COUPONS ===
+  if (url === '/admin/coupons' && method === 'GET') {
+    return respond([
+      { id: 1, code: 'WELCOME50', type: 'flat', value: 50, minOrderAmount: 299, maxDiscount: 50, usageLimit: 1000, usedCount: 150, validFrom: new Date().toISOString(), validUntil: new Date(Date.now() + 90*24*60*60*1000).toISOString(), isActive: true },
+      { id: 2, code: 'FLAT20', type: 'percentage', value: 20, minOrderAmount: 999, maxDiscount: 500, usageLimit: 500, usedCount: 42, validFrom: new Date().toISOString(), validUntil: new Date(Date.now() + 30*24*60*60*1000).toISOString(), isActive: true }
+    ]);
+  }
+
+  if (url === '/admin/coupons' && method === 'POST') {
+    return respond({ id: Date.now(), message: 'Coupon created successfully' });
+  }
+
+  if (url.match(/^\/admin\/coupons\/\d+$/) && method === 'DELETE') {
+    return respond({ message: 'Coupon deleted successfully' });
+  }
 
   // No mock available for this route
   return null;

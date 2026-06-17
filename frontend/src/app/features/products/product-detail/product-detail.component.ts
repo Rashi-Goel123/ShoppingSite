@@ -36,9 +36,10 @@ export class ProductDetailComponent implements OnInit {
       if (slug) {
         this.productService.getBySlug(slug).subscribe({
           next: (p) => {
+            console.log('Received product:', p);
             this.product.set(p);
-            this.selectedImage.set(p.images[0]?.url || '');
-            const colorList = [...new Set(p.variants.map(v => v.color).filter(Boolean) as string[])];
+            this.selectedImage.set(p.images && p.images.length > 0 ? p.images[0].url : '');
+            const colorList = [...new Set(p.variants?.map(v => v.color).filter(Boolean) as string[] || [])];
             this.colors.set(colorList);
             if (colorList.length > 0) this.selectColor(colorList[0]);
             this.loading.set(false);
@@ -99,13 +100,13 @@ export class ProductDetailComponent implements OnInit {
         quantity: 1, stock: v.stock
       });
       this.toastService.success('Product added to cart successfully!');
-      this.cartService.openDrawer();
+      this.router.navigate(['/cart']);
     } else {
       this.cartService.addToCart(p.id, v.id).subscribe({
         next: () => {
           this.cartService.loadCart();
           this.toastService.success('Product added to cart successfully!');
-          this.cartService.openDrawer();
+          this.router.navigate(['/cart']);
         },
         error: (err) => {
           if (err.status === 401) {

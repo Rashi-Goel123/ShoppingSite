@@ -1,0 +1,24 @@
+<div class="admin-layout">
+  <aside class="admin-sidebar">
+    <div class="sidebar-header">
+      <h3 style="color:var(--primary-light);font-family:var(--font-heading);margin:0;font-size:1.4rem">🔧 Admin Panel</h3>
+    </div>
+    <nav class="sidebar-nav">
+      <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+        <span class="icon">📊</span> Dashboard
+      </a>
+      <a routerLink="/admin/products" routerLinkActive="active" class="nav-link">
+        <span class="icon">👗</span> Products
+      </a>
+      <a routerLink="/admin/coupons" routerLinkActive="active" class="nav-link">
+        <span class="icon">🎟️</span> Coupons
+      </a>
+    </nav>
+    <div class="sidebar-footer mt-auto p-3 border-top" style="border-color:var(--border-color) !important">
+      <a routerLink="/" class="btn btn-sm btn-outline-glow w-100">← Back to Store</a>
+    </div>
+  </aside>
+  <main class="admin-main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
@@ -10,7 +10,7 @@ import { ProductListItem, Category } from '../../../core/models/models';
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
 })
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, AfterViewInit, OnDestroy {
   private productService = inject(ProductService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -18,10 +18,17 @@ export class ProductListComponent implements OnInit {
   products = signal<ProductListItem[]>([]);
   categories = signal<Category[]>([]);
   loading = signal(true);
+  loadingMore = signal(false);
   totalCount = signal(0);
+  totalPages = signal(1);
+  currentPage = signal(1);
+  hasMore = signal(false);
   pageTitle = signal('All Products');
 
   filters: any = { category: '', gender: '', sortBy: 'newest', search: '', minPrice: null, maxPrice: null, page: 1, pageSize: 12 };
+
+  @ViewChild('scrollSentinel') scrollSentinel?: ElementRef;
+  private observer?: IntersectionObserver;
 
   ngOnInit() {
     this.productService.getCategories().subscribe(c => this.categories.set(c));
@@ -32,9 +39,48 @@ export class ProductListComponent implements OnInit {
       this.filters.sortBy = params['sortBy'] || 'newest';
       this.filters.minPrice = params['minPrice'] || null;
       this.filters.maxPrice = params['maxPrice'] || null;
+      this.filters.page = 1;
+      this.currentPage.set(1);
       this.updateTitle();
-      this.loadProducts();
+      this.loadProducts(true);
     });
+  }
+
+  ngAfterViewInit() {
+    this.setupIntersectionObserver();
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
+  }
+
+  private setupIntersectionObserver() {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && this.hasMore() && !this.loadingMore() && !this.loading()) {
+          this.loadNextPage();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+
+    // Observe after a short delay to ensure the element exists
+    setTimeout(() => {
+      if (this.scrollSentinel?.nativeElement) {
+        this.observer!.observe(this.scrollSentinel.nativeElement);
+      }
+    }, 500);
+  }
+
+  private reobserveSentinel() {
+    // Re-observe the sentinel after view updates
+    setTimeout(() => {
+      this.observer?.disconnect();
+      if (this.scrollSentinel?.nativeElement) {
+        this.observer!.observe(this.scrollSentinel.nativeElement);
+      }
+    }, 100);
   }
 
   onFilterChange() {
@@ -52,12 +98,42 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  loadProducts() {
-    this.loading.set(true);
+  loadProducts(reset: boolean) {
+    if (reset) {
+      this.loading.set(true);
+      this.products.set([]);
+      this.filters.page = 1;
+      this.currentPage.set(1);
+    }
+
     this.productService.getProducts(this.filters).subscribe({
-      next: (res) => { this.products.set(res.items); this.totalCount.set(res.totalCount); this.loading.set(false); },
-      error: () => { this.loading.set(false); }
+      next: (res) => {
+        if (reset) {
+          this.products.set(res.items);
+        } else {
+          this.products.update(current => [...current, ...res.items]);
+        }
+        this.totalCount.set(res.totalCount);
+        this.totalPages.set(res.totalPages);
+        this.hasMore.set(this.currentPage() < res.totalPages);
+        this.loading.set(false);
+        this.loadingMore.set(false);
+        this.reobserveSentinel();
+      },
+      error: () => {
+        this.loading.set(false);
+        this.loadingMore.set(false);
+      }
     });
+  }
+
+  loadNextPage() {
+    if (this.loadingMore() || !this.hasMore()) return;
+    this.loadingMore.set(true);
+    const nextPage = this.currentPage() + 1;
+    this.currentPage.set(nextPage);
+    this.filters.page = nextPage;
+    this.loadProducts(false);
   }
 
   updateTitle() {
